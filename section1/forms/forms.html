@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>forms</title>
+  </head>
+  <body>
+    <form action="/hi">
+      <label for="username">username</label>
+      <input id="username" type="text" placeholder="username" name="username" />
+      <hr />
+      <label for="password">password</label>
+      <input
+        type="password"
+        id="password"
+        placeholder="password"
+        name="password"
+      />
+      <!-- name ==> is what the name of input when goes to server -->
+      <hr />
+      <input type="submit" value="input submit" />
+      <!-- its bad way to write submit becuase you cann't do or write any thing insid it just 
+    throw value-->
+      <button>submit</button>
+      <button type="submit">type submit</button>
+      <!-- button willnot send you any where becuase you have wrong form action -->
+      <button type="button">its do nothing</button>
+      <!-- its do nothing becuase it have type button -->
+    </form>
+    <button>its also do nothing</button>
+    <!-- its do nothing becuase it out the form -->
+    <hr />
+    <!-- search in some website -->
+    <form action="https://www.youtube.com/search">
+      <input type="search" name="search_query" />
+      <!-- you should write the same name in URL in youtupe  -->
+      <button>search in youtube</button>
+    </form>
+    <form action="https://www.reddit.com/search/">
+      <input type="search" name="q" />
+      <!-- you should write the same name in URL in youtupe  -->
+      <button>search in reddit</button>
+    </form>
+  </body>
+</html>

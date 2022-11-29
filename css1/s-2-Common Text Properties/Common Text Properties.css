@@ -1,0 +1,42 @@
+h1{
+    text-align: center;
+    font-weight: 400;
+    text-decoration:red underline wavy;
+    letter-spacing: 14px;
+    
+
+}
+
+p{
+    text-align:right;
+    font-weight:200;
+    line-height: 2;
+    font-size: small;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+     
+}
+a{
+    color: rgb(255, 0, 0);
+    text-decoration: none;
+}
+/* 
+text-align ==> its move the text any where you want like center or end .....
+and its move the contant inside h1 but h1 not move 
+
+font-weight ==> its control in the text like bolder or lighter
+the numbers
+400 > lighter
+400 = normal
+400 < bold
+
+text-decoration ==>property sets the appearance of decorative lines on
+you can search about it .it a huge world 
+
+line-height ==>control on the space between line and line
+
+letter-spacing ==> make space between the letter
+
+font-size ==> control on size 
+
+font-family ==> the kind of the type
+*/

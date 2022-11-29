@@ -1,0 +1,144 @@
+.text h3{
+    width: 300px;
+    background-color: rgb(253, 230, 201);
+}
+.tittle {
+    width: 150px;
+    height: 70px;
+    color: aqua;
+    background-color: rgb(255, 94, 0);
+    padding-left: 25px;
+    /* look to the background it is not goes to all the line  */
+
+}
+
+
+.img {
+    width: 140px;
+    height: 140px;
+}
+
+
+.logo{
+   
+    width: 80px;
+    height: 80px;
+    position: relative;
+   
+} 
+
+a{
+    text-decoration: none
+}
+
+.links {
+    width: 470px;
+    height: 100;
+    position: relative; top: -21px; left: 200px;
+    border: 5px inset blue;
+    border-radius: 10px;
+    display: flex;
+    margin-right: 47px;
+    padding-top: 4px;
+    padding-bottom:4px ;
+}
+
+.link{
+width: 100px;
+}
+.wsearch{
+    width: 250px;
+    background-color: rgb(187, 240, 255);
+    padding-left:100px ;
+    border-radius:8px ;
+   
+}
+h2{
+    font-style: italic;
+}
+.bsearch{
+padding: 15px;
+border: none;
+color: rgb(0, 0, 0);
+background-color: aqua;
+font-size:large;
+border-radius:5px ;
+font-style: italic;
+
+margin-top:5px ;
+
+
+}
+button:hover{
+    color: red;
+}
+.margin{
+    padding: 15px;
+    border: none;
+    color: rgb(0, 0, 0);
+    background-color: aqua;
+    font-size:large;
+    border-radius:5px ;
+    font-style: italic;
+    margin-left:180px ;
+    margin-top:5px ;
+
+}
+form{
+    display: inline;
+}
+h2{
+    display: inline;
+}
+.what-we-do a{
+    text-align: center;
+    display: block;
+    color: black;
+}
+.block{
+    display: block;
+    color: red;
+    background-color: rgb(0, 213, 255);
+    width: 50px;
+    font-size: larger;
+}
+.normal{
+    color: rgb(255, 0, 89);
+    font-size: larger;
+    width: 100px;
+    padding: 20px;
+    border: 10px inset cornflowerblue;
+    margin: 40px;
+    background-color: aquamarine;
+}
+.block-inline{
+    color: red;
+    display: inline-block; font-size: larger;
+    width: 100px;
+    padding: 20px;
+    border: 10px inset cornflowerblue;
+    margin: 40px;
+    background-color: aquamarine;
+}
+a:hover{
+    color: red;
+}
+
+/* 
+bordar ==> its cover element , to make bordar you need 3 things, first one size
+secand one style  thered one color
+
+bordar radius ==> make carve in the bordar
+padding-.....  ==> adding space between the element or the contant and the border
+  NOTE: if you write padding alone the space will be for all ways
+
+  margin ==> it is make space between element and another element
+
+  dispaly ==> it is change block element to inline element or opposite. look for span
+  its chang form inline to block line
+
+  veru imporatan: inline not respact top and bottom (vartical) it just left and right becuace that we use inline-block
+
+
+
+*/
