@@ -1,0 +1,28 @@
+a{
+    color: black;
+}
+section{
+    width: 200px;
+    height: 200px;
+    background-color: aqua;
+}
+#rgba{
+    width: 50%;
+    height: 50%;
+    background-color: rgba(255, 255, 255 , 0.7);
+}
+
+#opacity{
+    width: 50%;
+    height: 50%;
+    background-color: rgb(231, 21, 21);
+    opacity: 0.55;
+
+}
+
+/* 
+  rgba ==> (red, green, blue, alpha)
+  
+  opacity ==> but the element under the color 
+
+*/
