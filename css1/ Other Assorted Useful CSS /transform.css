@@ -1,0 +1,35 @@
+.one{
+    width: 200px;
+    height: 45px;
+    background-color: aqua;
+    padding: 20px;
+    padding-top: 1px;
+    padding-left: 50px;
+    border: 2px inset black;
+    margin: 20px auto;
+}
+.one:nth-of-type(1)
+{   transform-origin: top left ;
+    transform: rotate(30deg);
+}
+.scale{
+    width: 100px;
+    height: 100px;
+    background-color: red;padding: 20px;
+    padding-top: 1px;
+    padding-left: 50px;
+    border: 2px inset black;
+    margin-top: 150px ;
+    position: relative;
+    left: 200px;
+}
+.scale:nth-of-type(2)
+{
+    transform: scale(0.5);
+}
+
+/*
+transform: rotate (dgree) ==> it is rotate the element
+transform-origin ==> The transform origin is the point around which a transformation is applied.
+transform:scale(width , height) ==> it is make scale for natural size
+*/
