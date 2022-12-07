@@ -25,11 +25,67 @@
 }
 .scale:nth-of-type(2)
 {
-    transform: scale(0.5);
+    transform: scales(0.5);
 }
-
+.translate{
+    width: 100px;
+    height: 100px;
+    background-color: rgb(0, 255, 4);padding: 20px;
+    padding-top: 1px;
+    padding-left: 20px;
+    padding-right: 30px;
+    border: 2px inset black;
+    margin-top: 150px ;
+    position: relative;
+    left: 200px;
+}
+.translate{
+    transform:translate(400px , 30px)
+}
+.skew{
+    width: 100px;
+    height: 70px;
+    background-color: rgb(0, 166, 255);padding: 20px;
+    padding-top: 10px;
+    padding-left: 20px;
+    padding-right: 10px;
+    border: 2px inset black;
+    margin-top: 150px ;
+    position: relative;
+    left: 200px;
+}
+.skew{
+    transform:skew(40deg)
+}
+.rotate{
+    width: 100px;
+    height: 70px;
+    background-color: rgb(247, 0, 255);padding: 20px;
+    padding-top: 10px;
+    padding-left: 20px;
+    padding-right: 10px;
+    border: 2px inset black;
+    margin-top: 150px ;
+    position: relative;
+    left: 200px;
+}
+.rotate{
+    transform: translate(100px);
+    transform: rotate(30deg);
+}
 /*
 transform: rotate (dgree) ==> it is rotate the element
 transform-origin ==> The transform origin is the point around which a transformation is applied.
 transform:scale(width , height) ==> it is make scale for natural size
+transform: translate ==> you can move the element any where .
+
+how you can control on movement or size => that with x ,y  like transletex or 
+translatey or translate(x ,y)
+
+transform: skew  ==> its make skew and you can control like skew (x ,y)
+
+transform: rotate ==> it makes rotate
+
+
+ 
 */
