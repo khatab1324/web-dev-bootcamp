@@ -18,6 +18,22 @@ h1{
     height: 150px;
     margin: 1px;
 }
+#contaners2{
+    width: 80%;
+    height: 500px;
+    background-color: rgb(24, 24, 90);
+    margin: 10%;     
+    padding: 5px;
+    display: flex; 
+    flex-direction: row-reverse;
+    flex-direction: column;
+
+}
+#contaners2 div{
+    width: 150px;
+    height: 150px;
+    margin: 1px;
+}
 
 /* 
 flex ==> it is hard to explan what is but you should know it control on the size and how 
