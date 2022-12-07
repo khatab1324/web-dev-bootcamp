@@ -1,0 +1,29 @@
+h1{
+    font-family: open sans, sans-serif;
+    text-align: center;
+}
+#contaners{
+    width: 80%;
+    height: 500px;
+    background-color: rgb(24, 24, 90);
+    margin: 10%;     
+    padding: 5px;
+    display: flex; 
+    flex-direction: row-reverse;
+    flex-direction: column;
+
+}
+#contaners div{
+    width: 150px;
+    height: 150px;
+    margin: 1px;
+}
+
+/* 
+flex ==> it is hard to explan what is but you should know it control on the size and how 
+orgnize the places of the elements 
+
+flex-direction: row-reverse ==> its will oppisite the element from right to left and there direction
+flex-direction: column ==> it make the element goes form up to down
+
+*/
