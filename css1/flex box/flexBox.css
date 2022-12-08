@@ -10,7 +10,7 @@ h1{
     padding: 5px;
     display: flex; 
     flex-direction: row-reverse;
-    flex-direction: column;
+    justify-content: space-between;
 
 }
 #contaners div{
@@ -22,11 +22,14 @@ h1{
     width: 80%;
     height: 500px;
     background-color: rgb(24, 24, 90);
-    margin: 10%;     
+    margin: 0 auto;     
     padding: 5px;
     display: flex; 
     flex-direction: row-reverse;
     flex-direction: column;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
 
 }
 #contaners2 div{
@@ -34,6 +37,68 @@ h1{
     height: 150px;
     margin: 1px;
 }
+#justify-content{
+    width: 80%;
+    height: 500px;
+    background-color: rgb(24, 24, 90);
+    margin: 10%;     
+    padding: 5px;
+    display: flex; 
+  justify-content: flex-end;
+  justify-content: space-around;
+
+}
+#justify-content div{
+    width: 150px;
+    height: 150px;
+    margin: 1px;
+}
+
+#justify-content div:nth-of-type(3){
+align-self: center;
+}
+
+
+#justify-content-center{
+    width: 80%;
+    height: 500px;
+    background-color: rgb(24, 24, 90);
+    margin: 10%;     
+    padding: 5px;
+    display: flex; 
+  justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 3em;
+}
+#justify-content-center div{
+    width: 150px;
+    height: 150px;
+    margin: 1px;
+
+
+}
+#justify-content-baseline{
+    width: 80%;
+    height: 500px;
+    background-color: rgb(24, 24, 90);
+    margin: 10%;     
+    padding: 5px;
+    display: flex; 
+  justify-content: center;
+    align-items: baseline;
+    text-align: center;
+    font-size: 3em;
+}
+#justify-content-baseline div{
+    width: 150px;
+    height: 150px;
+    margin: 1px;
+
+
+}
+
+
 
 /* 
 flex ==> it is hard to explan what is but you should know it control on the size and how 
@@ -42,4 +107,28 @@ orgnize the places of the elements
 flex-direction: row-reverse ==> its will oppisite the element from right to left and there direction
 flex-direction: column ==> it make the element goes form up to down
 
+justify-content ==>property defines how the browser distributes space between and around content items along the main-axis of a flex container
+, and the inline axis of a grid container.
+
+justify-content : flex-end ==> it start form end
+
+justify-content : center ==> it make the element in the center
+
+justify-content: space-between ==> making space between div or element
+
+justify-content: space-around ==> making space around not between that mean the element have space around 
+
+justify-content: space-evenly ==> it make the same space betweem the contaner and the element
+
+flex-wrap ==> property sets whether flex items are forced onto one line or can wrap onto multiple lines. If wrapping is allowed, it sets the direction that lines are stacked.
+and you should know the wrap goes form top to bottom
+
+align-items ==> its like justify-content but the justify work on main axis (right ,left)
+but the align items worke on across axis (up ,down)
+
+align-item : baseline ==> it make all text and element depents on the large text , look all the other move to accomadate 
+the number 1 that mean number 1 is the baseline  
+
+align-self ==> it use to control on one item look to box justify-content , look to the theird one 
+i control on it alone 
 */
