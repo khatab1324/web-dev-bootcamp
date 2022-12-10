@@ -1,0 +1,112 @@
+h1{
+    font-family: open sans, sans-serif;
+    text-align: center;
+}
+#contaners{
+    width: 80%;
+    height: 150px;
+    background-color: rgb(24, 24, 90);
+    margin: 10%;     
+    padding: 5px;
+    display: flex; 
+    flex-direction: column;
+    
+
+
+}
+#contaners div{
+    width: 150px;
+    height: 150px;
+    margin: 1px;
+    flex-basis: 20px;
+}
+#contaners2{
+    width: 90%;
+    height: 150px;
+    background-color: rgb(24, 24, 90);
+    margin: 5%;     
+    padding: 5px;
+    display: flex; 
+    justify-content: center;
+
+}
+#contaners2 div{
+    width: 150px;
+    height: 150px;
+    margin: 1px;
+    flex-basis: 150px;
+ 
+}
+#contaners2 div:nth-of-type(1)
+{
+    flex-grow: 1;
+}
+#contaners2 div:nth-of-type(4)
+{
+    flex-grow: 2;
+}
+
+#contaners3{
+    width: 80%;
+    height: 150px;
+    background-color: rgb(24, 24, 90);
+    margin: 10%;     
+    padding: 5px;
+    display: flex; 
+    justify-content: center;
+    
+
+
+}
+#contaners3 div{
+    width: 200px;
+    height: 150px;
+    margin: 1px;
+
+}
+#contaners3 div:nth-of-type(1)
+{ 
+   flex-shrink: 3;
+}
+
+.main{
+    width: 80%;
+    margin: 0 auto;
+    border: 5px solid black;
+    height: 500px;
+    display: flex; 
+}
+.sidebar
+{   background-color:aqua;
+    border: 1px solid black;
+    flex: 1;
+    flex-basis: 300px;  
+    flex-shrink: 2;
+
+}
+.maincontent
+{
+    border: 1px solid black;
+    flex: 1;
+    flex-basis: 200px; 
+    /* to give flex the space */
+
+}
+
+    /* 
+flex-basis ==> it the main space for element it like the refrence size for element
+
+flex-grow ==> it take all the space is rmaining 
+ 
+flex-grow: n ==> n is , lets say n=2 ok it will ask this qaustion what is the first one size i wll be towis
+
+flex-shrink ==> its oppisite the flex-grow  , like if you have sqaurs , they width biger than contaner the
+shrink will small one , and give this space was taken and gave it to other sqaurs 
+NOTE: shrink happen whan you get the windo smaller 
+
+flex ==> look flex is divide for tow thing x-axis => maincontent in our cause 
+and y-axis => sidebar in our cause or you can use align-item=> y-axis  and justufy-item => x-axis.
+ok than what! lessen flex use the y and x axis to make box that box you can disgain it what ever you want.
+ 
+
+*/
