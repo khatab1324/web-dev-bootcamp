@@ -1,0 +1,164 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font-family: 'open sans', sans-serif ;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/* ----------------------------------------------------------------------- */
+/* real desghin */
+
+html{
+    box-sizing: border-box;
+    /* here i put the border for all page and any element not goes out this border */
+}
+body{
+    background-color: rgb(195, 3, 64);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    
+}
+.panel-pricing-table{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 15px;
+    padding: 15px 20px;
+    /* remember padding: ypx xpx; */
+    width: 100%;
+    max-width: 1050px;
+    text-align: center;
+    text-transform: uppercase;
+
+    
+}
+img{
+    width: 350px;
+}
+.pricing-plan{
+    border-bottom: 1px solid rgb(239, 237, 237);
+}
+.pricing-plan:last-child{
+    border-bottom:none;
+}
+.pricing-header{
+    color: rgb(178, 177, 177);
+    margin-top:20px ;
+    margin-bottom: 20px;
+    letter-spacing: 1px ;
+    font-weight: 900;
+}
+.pricing-features{
+    margin: 50px 0 25px;
+    color: brown;
+}
+.pricing-features-item{
+      
+    font-weight:100;
+    font-size:15px;
+    line-height: 1.4;
+    padding: 12px 0;
+    border-top: 1px solid rgb(239, 237, 237);
+}
+.pricing-features-item:last-child{
+    border-bottom: 1px solid rgb(239, 237, 237) ;
+}
+.pricing-price{
+display:block;
+color: rgb(109, 45, 74);
+font-size:25px;
+font-weight:600;
+}
+
+.pricing-button{
+    display: inline-block;
+    width: 120px; 
+    height:40px;
+    color:rgb(157, 15, 138);
+    border: 1px solid rgb(92, 43, 65);
+    border-radius: 15px;
+    margin:25px 0;
+    padding-top: 25px;
+    text-decoration: none;
+    font-weight: 550;
+    
+
+}
+.pricing-button:hover{
+    background-color: rgba(195, 200, 219, 0.357);
+    transition:  background-color 200ms ease-in-out;
+}
+@media(min-width:1100px){
+    .panel-pricing-table{
+        flex-direction: row;
+    }
+    .pricing-plan{
+        border-right: 1px solid rgb(239, 237, 237);
+        padding: 25px 50px;
+        border-bottom: none;
+
+    }
+    .pricing-plan:last-child{
+        border-right: none;
+    }
+    img{
+        width: 250px;
+    }
+
+}
+@media(min-width:900px )and (max-width:1100px){
+    .panel-pricing-table{
+        flex-direction: row;
+    }
+    .pricing-plan{
+        border-right: 1px solid rgb(239, 237, 237);
+        padding: 25px 50px;
+        border-bottom: none;
+
+    }
+    .pricing-plan:last-child{
+        border-right: none;
+    }
+    img{
+        width: 150px;
+    }
+
+}
