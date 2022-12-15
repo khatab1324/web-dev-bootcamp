@@ -39,6 +39,7 @@ footer a{
 }
 input[type="checkbox"]:checked {
     box-shadow: 0 0 0 3px red;
+    
 }
 input[type="checkbox"]:checked + label{
     color: red;
@@ -85,11 +86,11 @@ color: red;
     background-color: rgb(0, 255, 242);
 }
 h2::first-letter{
-    color: red;
+    color: rgb(214, 19, 19);
     font-size: 50px;
 }
 ::selection{
-   background-color: rgb(251, 123, 100);
+   background-color: rgba(237, 17, 127, 0.418);
 }
 
 
@@ -113,7 +114,9 @@ h2::first-letter{
 
     checked ==> it is with input check to get some action when you press on check box
 
-    nth-of-type ==> it makes sets of changes on elements at the same time . search about it, 
+    nth-of-type ==> it makes sets of changes on elements at the same time . search about it, like if you have 
+    alot if element and all these element have tha same name or same class you can choss any one like nth-of-type(2) it will 
+    chose the secnde element 
               IT IS VERY IMPORTANT
 
                 PSEUDO ELEMENTE
