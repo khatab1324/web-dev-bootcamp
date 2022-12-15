@@ -50,7 +50,7 @@ elemnt insaide element
 */
 
 h2 + a {
-    color: tomato;
+    color: rgb(231, 69, 40);
 }
 footer > h2{
     color: aquamarine;
