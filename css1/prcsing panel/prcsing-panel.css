@@ -58,7 +58,6 @@ body{
 }
 .panel-pricing-table{
     display: flex;
-    flex-direction: column;
     background-color: white;
     border-radius: 15px;
     padding: 15px 20px;
