@@ -21,3 +21,4 @@
 
 // let str = 'Hello, world!';   let index = str.indexOf('world');console.log(index); // 7In this example, the indexOf() method searches the string 'Hello, world!' for the value 'world'. It finds this value at position 7 (the first character has an index of 0), so it returns 7.
 // If the value is not found, the method returns -1.
+//
