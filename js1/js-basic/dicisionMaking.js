@@ -51,6 +51,10 @@
 // to chang string to number or the opposite .write parseInt(age) now it is as number
 
 // -----------------------------------------------if condition ------------------------------------------
-// you know it if ( x +2 = 4){ the condition}
+// you know it if ( x +2 == 4){ the condition}
 
-// ----------------------------------------------- else
+// ----------------------------------------------------else if-------------------------------------------
+// if the frist condition not true try this
+//
+
+// -------------------------------------------else----------------------------------------
