@@ -58,3 +58,4 @@
 //
 
 // -------------------------------------------else----------------------------------------
+// when you have alot thing have the same thing use else
