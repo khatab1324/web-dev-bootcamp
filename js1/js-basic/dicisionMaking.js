@@ -87,6 +87,8 @@
 //   default:
 //     console.log('No option is selected');
 //  }
-// In this example, the switch statement compares the value of the option variable to the values in each of the case clauses. If there is a match, the code inside the corresponding block is executed. If none of the case values match, the code inside the default block is executed.
+// In this example, the switch statement compares the value of the option variable to the values in each of the case clauses.
+// If there is a match, the code inside the corresponding block is executed. If none of the case values match, the code inside the default block is executed.
 
 // Note that each case block should end with a break statement to exit the switch block. If you omit the break statement, the code will continue to be executed into the next case block, even if the values do not match.
+// that mean you have one value want comper it use switch
