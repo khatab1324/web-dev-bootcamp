@@ -87,6 +87,7 @@
 //   default:
 //     console.log('No option is selected');
 //  }
+// break mean end the case
 // In this example, the switch statement compares the value of the option variable to the values in each of the case clauses.
 // If there is a match, the code inside the corresponding block is executed. If none of the case values match, the code inside the default block is executed.
 
