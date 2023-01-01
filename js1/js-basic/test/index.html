@@ -10,5 +10,22 @@
     <h1 style="background-color: red">test js</h1>
 
     <script src="app.js"></script>
+    <button id="color-button">Toggle color</button>
+    <script>
+      const button = document.getElementById("color-button");
+      let currentColor = "white";
+      button.onclick = function () {
+        if (currentColor === "white") {
+          document.body.style.backgroundColor = "red";
+          currentColor = "red";
+        } else if (currentColor === "red") {
+          document.body.style.backgroundColor = "green";
+          currentColor = "green";
+        } else {
+          document.body.style.backgroundColor = "white";
+          currentColor = "white";
+        }
+      };
+    </script>
   </body>
 </html>
