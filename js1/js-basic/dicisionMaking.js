@@ -59,3 +59,34 @@
 
 // -------------------------------------------else----------------------------------------
 // when you have alot thing have the same thing use else
+
+// ------------------------------------truthy - falsy-----------------------------------------------------
+// every thing in js is truthy
+// the element that is falsy (NaN , 0 , false ,emdy string ,'' , undifined)
+// like if you write   if(0) that mean if(false) that mean the condition will not work
+// if i write if(-1) is truthy , if (NaN) is falsy
+
+// ---------------------------------and ,or , not--------------------------------------------------
+// and &&
+//or ||
+// not !
+
+//-----------------------------------------------------Switch-----------------------------------------------------
+// const option = 'option1';
+
+// switch (option) {
+//   case 'option1':
+//     console.log('Option 1 is selected');
+//     break;
+//   case 'option2':
+//     console.log('Option 2 is selected');
+//     break;
+//   case 'option3':
+//     console.log('Option 3 is selected');
+//     break;
+//   default:
+//     console.log('No option is selected');
+//  }
+// In this example, the switch statement compares the value of the option variable to the values in each of the case clauses. If there is a match, the code inside the corresponding block is executed. If none of the case values match, the code inside the default block is executed.
+
+// Note that each case block should end with a break statement to exit the switch block. If you omit the break statement, the code will continue to be executed into the next case block, even if the values do not match.
