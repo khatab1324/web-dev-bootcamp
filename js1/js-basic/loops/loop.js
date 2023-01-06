@@ -109,3 +109,35 @@ while (i < numbers.length) {
   }
   i++;
 }
+//
+//
+// -------------------------------------------------------------------- for....of ----------------------
+// its like same the work the code above but more profitional
+console.log(" ");
+console.log("for....of");
+let letter = ["a", "b", "c"];
+for (const element of letter) {
+  console.log(element);
+}
+// expected output: "a"
+// expected output: "b"
+// expected output: "c"
+
+//
+console.log(" ");
+let arr = [
+  ["apple", "banana", "cherry"],
+  ["dog", "elephant", "fish"],
+  ["green", "yellow", "blue"],
+];
+// you can do the same thing
+for (let row of arr) {
+  for (let elememt of row) {
+    console.log(elememt);
+  }
+}
+console.log(" ");
+// and you can make this
+for (let char of "hello world") {
+  console.log(char);
+}
