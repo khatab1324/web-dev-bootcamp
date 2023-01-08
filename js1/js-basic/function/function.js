@@ -58,10 +58,15 @@ function multiply(x, y) {
 sum = multiply(2, 3);
 console.log(sum);
 
-function sumArray(asum) {
-  let total = asum[0];
-  for (let i = 0; i <= length.asum; i++) {
-    total += asum[i];
+// ----------------------------------------sum--------------------------------
+function sumArray(numbers) {
+  let total = 0;
+  for (let i = 0; i < numbers.length; i++) {
+    total += numbers[i];
   }
   return total;
 }
+console.log(sumArray([1, 2, 3]));
+// NOTE: donot put i <= numbers.length becuase length =3 that mean i=3
+// number[i]   number[0] -> 1 number[1] -> 2 number[2] -> 3 number[3] -> undefine
+// number + undefine = NaN
