@@ -180,7 +180,7 @@ try {
 }
 // or you can print the problem
 try {
-  // the wrong I don't define the hello
+  // the wrong I don't define the hello by gining catch porm..
   hello.toUppercase();
 } catch (e) {
   console.log(e);
