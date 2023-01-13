@@ -108,3 +108,18 @@ console.log(words);
 // similar to every , but returns true if any of the array elements pass the test function
 let anyUsersOver30 = users.some((user) => user.age > 30);
 console.log(anyUsersOver30); // true
+
+// ---------------------------------------------------reduse-------------------------------------
+// execute a reduser function on each element of the array,resulting in a single value
+// watch the vedio
+
+// --------------------------------------------NOTE: about this and arrow------------------------------
+const me = {
+  firstName: "khattab",
+  lastName: "fayyad",
+  fullname: () => {
+    return `${this.firstName} ${this.lastName}`;
+  },
+};
+
+// if write me.fullname() //'undefined undefined'. why its not working with arrow
