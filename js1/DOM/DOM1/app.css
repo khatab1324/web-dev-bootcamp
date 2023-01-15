@@ -1,0 +1,104 @@
+ /* you should know the strucsher of the css 
+
+selector{
+    property :value;
+    now we will learn about selector
+}
+*/
+*{
+    color: rgb(73, 98, 98);
+    background-color: rgb(161, 201, 200);
+}
+h1 a{
+    text-decoration: none;
+}
+button{
+    font-size: 20px;
+}
+h1,h2{
+    font-style: italic;
+}
+
+#send{
+    color: red;
+    background-color: antiquewhite;
+}
+
+span{
+    color: rgb(255, 0, 98);
+}
+
+/* class selector */
+.highlight{
+    background-color: bisque;
+}
+
+footer a{
+    color: rgb(153, 73, 190);
+    text-decoration: solid ;
+}
+input[type="checkbox"]:checked {
+    box-shadow: 0 0 0 3px red;
+    
+}
+input[type="checkbox"]:checked + label{
+    color: red;
+}
+
+/* 
+using space to enter to element is not like --> , comma . it likes i want to arraive to the 
+elemnt insaide element
+*/
+
+h2 + a {
+    color: rgb(231, 69, 40);
+}
+footer > h2{
+    color: aquamarine;
+    text-align: center;
+}
+
+input[type ="password"]{
+    color: red;
+}
+#imgs{
+    width: 200px;
+    height: 200px;
+    padding: 10px;
+    border-radius: 50%;
+
+}
+
+#chick:hover{
+    background-color: aliceblue;
+    color: red;
+}
+
+#send:hover{
+    background-color: rgb(192, 225, 242);
+    
+  }
+
+h1 a:hover {
+color: red;
+}
+
+
+#nothing{
+    color: red;
+
+   position: relative;left: 250px ; top: 30px;  
+}
+
+#nothing:active{
+    background-color: rgb(0, 255, 242);
+}
+h2::first-letter{
+    color: rgb(214, 19, 19);
+    font-size: 50px;
+}
+::selection{
+   background-color: rgba(237, 17, 127, 0.418);
+}
+
+
