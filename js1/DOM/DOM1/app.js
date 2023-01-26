@@ -13,3 +13,16 @@ for (let img of allimgs) {
   console.log(img.src);
 }
 // but if you ask what is the Element
+
+// ------------------------------------------------------querySelector -----------------------------------
+// all -in method to select single element
+document.querySelector("#imgs"); //donot forgit # for id or it will give you null
+// or
+document.querySelector("img"); //it will call the first element
+
+// if you want call item don't have id or class  like this <a title="linkhere" href="www.youtupe.com">youtupe</a>
+document.querySelector('a[title="linkhere"]'); //without sapac
+
+// -----------------------------querySelectorAll----it call all the same element
+document.querySelectorAll("p");
+document.querySelectorAll("a p"); // it will call all element in p inside a
