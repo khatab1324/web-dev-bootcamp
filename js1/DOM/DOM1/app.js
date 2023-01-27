@@ -26,3 +26,17 @@ document.querySelector('a[title="linkhere"]'); //without sapac
 // -----------------------------querySelectorAll----it call all the same element
 document.querySelectorAll("p");
 document.querySelectorAll("a p"); // it will call all element in p inside a
+
+// -------------------------------------manipulate -------------------------------------properties and method
+// we use manipulate to make js controle or maniplate on html or css
+
+// the first element is  innerText  to change text
+document.querySelector("a").innerText = "here js siiiii";
+
+// -------------------------------------------------------textContent---------------------
+// it simaler with innertext
+// it sensitive for element inside like if you call p and inside p there a ,the textcontent
+document.querySelector("p").textContent = "and also here js";
+
+//--------------------------------------------------------------- innerHTML
+//it same innertext but innerHTML but it show the element and you are replace it
