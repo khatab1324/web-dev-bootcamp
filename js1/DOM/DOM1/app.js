@@ -40,3 +40,38 @@ document.querySelector("p").textContent = "and also here js";
 
 //--------------------------------------------------------------- innerHTML
 //it same innertext but innerHTML but it show the element and you are replace it
+
+// -----------------------------------------------------------------------------Attribute-------------------------
+// the attribut i am not sure about it but i think it like link you save it in js
+// how you will save it or even call it
+const TheImges = document.querySelector("img");
+TheImges.getAttribute("id");
+
+// or even do this
+document.querySelector("img").src;
+
+// if you want to change the link or pass another one use set
+// TheImges.setAttribute('name' , 'the insted element')
+
+// ----------------------------------------------------------classList --------------------------
+const h2 = document.querySelector("h2");
+h2.getAttribute("class");
+//  to add class
+h2.setAttribute("class", "newClass");
+
+// how add new class beside the old class ???
+//  we can use `` and write all classes
+let current = h2.getAttribute("class"); //we make it to replace it
+h2.setAttribute("class", `${current} secondClass`);
+// just call h2
+
+//                          becuase that we need classList.add
+// it like pushing
+h2.classList.add("thired", "fourth");
+// to remove
+h2.classList.remove("fourth");
+
+// and you have element called toggle it like a swich of the light when you press on it first time it will turn on
+// and when you press on it again it will turn of
+h2.classList.toggle("thired");
+h2.classList.toggle("thired");
