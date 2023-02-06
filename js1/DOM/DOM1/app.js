@@ -142,4 +142,4 @@ body.removeChild(imgN);
 // ========================================= new remove ==============================================
 // just name the thing we want to remove it
 const buttonR = document.querySelector("button");
-buttonR.remove();
+buttonR.remove(); // just
