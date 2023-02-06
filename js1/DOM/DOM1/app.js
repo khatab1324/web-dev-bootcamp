@@ -75,3 +75,71 @@ h2.classList.remove("fourth");
 // and when you press on it again it will turn of
 h2.classList.toggle("thired");
 h2.classList.toggle("thired");
+// -----------------------------------------parentElement---------------------------
+// it call the parent like
+// <div><h1> hello </h1></div>
+document.querySelector("h1").parentElement;
+// it will give you the div
+
+// ------------------------------------------and you have childern------------------
+// it the aboside the parentElement thing but its
+
+//-------------------------------------------------sibling--------------------------
+// you have nextibling and priviosSibling it will give you the next or privios node
+// what node : somthing that we didn't talk about it ,but it send you text
+// like you have <h1> i am node </h1> . the text inside h1 is node
+
+// but next nextElementSibling it will give the next element
+
+// and now  --------------------------------------------------creatElement------------------
+// it creat new element in html
+// like i want make img element
+document.createElement("img");
+// but it make emdy element without source
+// i should save it in value
+const newImg = document.createElement("img");
+newImg.src = "./img/img2.png";
+
+// new you want to appended into the page
+document.body.appendChild(newImg);
+
+// ----------------------------------------------append....................................
+// it add more one noed at the end of the element
+const p = document.querySelector("p");
+p.append(" hello every body I am the new node", " also I am the secode one");
+// look it added at the end
+// you can't do that with the appedChild becuase it node
+
+// ----------------------------------------------prepend....................................
+// it add the node at the beganing
+const b = document.querySelector("p");
+b.prepend("i am in the firs ");
+
+// ----------------------------------------------Element.insertAdjacentElement()---------------------
+// insertAdjacentElement(position, element)
+// it to add element where you want
+// 'beforebegin': Before the targetElement itself.
+// 'afterbegin': Just inside the targetElement, before its first child.
+// 'beforeend': Just inside the targetElement, after its last child.
+// 'afterend': After the targetElement itself.
+
+// i wnat to creat new element
+const newh2 = document.querySelector("h2");
+// now i want add node
+newh2.append(" your eyes so beautifull");
+// now I want to diffine h1 to add h2 throw it
+const h1 = document.querySelector("h1");
+// now insert
+h1.insertAdjacentElement("afterbegin", h2);
+
+//----------------------------------------------node.removeChild  old way-----------------------------------------
+// its litter annoying becuace you need call the perent and the child
+const imgN = document.querySelector("img");
+// now you difine the body like parent . why body becuace the body the privios element
+const body = imgN.parentElement;
+body.removeChild(imgN);
+
+// ========================================= new remove ==============================================
+// just name the thing we want to remove it
+const buttonR = document.querySelector("button");
+buttonR.remove();
