@@ -15,11 +15,12 @@ body{
 .navbar1{
     position: fixed;
     width: 100%;
-    max-height: 4.8rem;
+    height: 80px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-
+    background-color: rgba(215, 245, 250, 0.835);
+    
 }
 
 .navbar1 img{
@@ -185,6 +186,15 @@ body{
    justify-content: center;
 
    
+}
+#gcolor{
+    height: 25px;
+    border: none;
+    background-color: aqua;
+    border-radius: 25px;
+}
+#gcolor:active{
+    background-color: rgb(255, 54, 54);
 }
 /* -----------------------------------------------------------media----------------------------------------------------------------- */
 @media(min-width:800px)
