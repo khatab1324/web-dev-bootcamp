@@ -1,12 +1,13 @@
 body{
     background-image: url("./imgs/977182.jpg");
     background-size:cover;
-    padding: none;
+    padding: 0px;
+    
     
    }
    *{
     box-sizing: border-box;
-   }
+    }
    ul,ol , li{
     list-style: none;
     display: inline;
@@ -166,6 +167,10 @@ body{
     margin-left: 10px;
     font-size: 25px;
     font-family: 'Marck Script', cursive;
+}
+.cbutton{
+    height: 50px;
+    width: 50px;
 }
 .end
 {
