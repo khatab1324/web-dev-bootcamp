@@ -4,7 +4,40 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="scoreKeeper.css" />
     <title>scorekeeper</title>
   </head>
-  <body></body>
+  <body>
+    <div class="container">
+      <div id="scores">
+        <h2>scores</h2>
+      </div>
+      <div class="firstPlayer">
+        <p>Player one</p>
+        <div class="playerscore1">
+          <span class="POne">0</span>
+        </div>
+        <button class="addOne1">+1</button>
+      </div>
+      <div class="secondPlayer">
+        <p id="p2">Player tow</p>
+        <div class="playerscore2">
+          <span class="PTow">0</span>
+        </div>
+        <button class="addOne2">+1</button>
+      </div>
+      <div id="choseScore">
+        <label>pick a limet number to win </label>
+        <input type="number" id="chosenumber" value="5" />
+        <button class="reset">RESET</button>
+      </div>
+      <audio controls id="audio">
+        <source
+          src="Europe - The Final Countdown(with lyrics).mp3"
+          type="audio/mpeg"
+        />
+      </audio>
+    </div>
+    <script src="scorekeeper.js"></script>
+  </body>
 </html>

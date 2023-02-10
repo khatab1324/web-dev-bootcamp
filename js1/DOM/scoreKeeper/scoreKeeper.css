@@ -1,0 +1,101 @@
+body{
+    display: flex;
+    justify-content: center;
+    
+}
+.container{
+    display: inline-block;
+}
+#scores{
+    display: flex;
+    justify-content: center;
+}
+.firstPlayer{
+    width: 300px;
+    border:1px solid black;
+    display: flex;
+    padding-left:10px;
+    border-bottom:none ;
+    justify-content: space-between;
+    border-radius:5px ;
+}
+
+.secondPlayer{
+    width: 300px;
+    border:1px solid black;
+    display: flex;   
+    padding-left:10px;
+    justify-content: space-between;
+    border-radius:5px ;
+}
+.addOne1 {
+    width: 50px;
+    height: 50px;
+    background-color: aqua;
+    border-radius: 5px;
+    border: none;
+    border-left: 1px solid black;
+}
+.addOne1:hover{
+    background-color: rgb(3, 220, 231);
+}
+.addOne2 {
+    width: 50px;
+    height: 50px;
+    background-color: aqua;
+    border-radius: 5px;
+    border: none;
+    border-left: 1px solid black;
+}
+.addOne2:hover{
+    background-color: rgb(3, 220, 231);
+}
+.playerscore1{
+    display: flex;
+    align-items: center;
+    position: relative;
+    left:40px;
+}
+
+.playerscore2{
+    display: flex;
+    align-items: center;
+    position: relative;
+    left:40px;
+}
+#vs {
+    height: 30%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+#choseScore{
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-content: space-between;
+}
+#chosenumber{
+    width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius:10px;
+}
+.reset{
+    width: 80px;
+    height: 20px;
+    background-color: red;
+    border-radius: 3px;
+    border: none;
+}
+.reset:active{
+    background-color: rgb(19, 138, 241);
+    color: aqua;
+    transition: background-color 0.5s ease-in 0.3s;
+}
+.reset:hover{
+    background-color: brown;
+    
+}
