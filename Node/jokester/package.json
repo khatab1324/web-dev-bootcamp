@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "give-me-a-joke": "^0.5.1",
+    "lang": "^0.1.1"
+  }
+}
