@@ -30,7 +30,6 @@ const MovieSchema = new mongoose.Schema({
 
 const Movie = mongoose.model("Movie", MovieSchema); //very important M capital
 //Movie will be in mongosh movies
-
 // I comment it because I already add it
 // const theFather = new Movie({
 //   name: "theFather",
@@ -66,7 +65,7 @@ const Movie = mongoose.model("Movie", MovieSchema); //very important M capital
 //   });
 //whatch 393 realy it hard to explan but to know he tell what is the query and you can use .then()
 // .... with it but it not pramis and use node and then load this file
-// to git the data Movie.find().then((data)=>console.log(data))
+// to get the data Movie.find().then((data)=>console.log(data))
 // spasifc data Movie.find({score:6.5}).then((data)=>console.log(data))
 
 // if you don't type .then the node will return for you very big object
