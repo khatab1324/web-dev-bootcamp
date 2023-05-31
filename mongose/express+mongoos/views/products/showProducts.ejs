@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>products</title>
+  </head>
+  <body>
+    <h1>here is your products</h1>
+    <% for(product of products){ %>
+    <li>
+      <%= product.name %>
+      <a href="/products/<%= product.id %>"><button>show product</button></a>
+    </li>
+    <hr />
+    <% } %>
+    <a href="/products/new"><button>add product</button></a>
+    <a href="/"><button>home page</button></a>
+  </body>
+</html>

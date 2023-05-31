@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>edit produdt</title>
+  </head>
+  <body>
+    <h1>edit produdt</h1>
+    <form method="POST" action="/products/<%= product._id %>?_method=PUT">
+      <!--the override let choose your method , here I choose PUT method  -->
+      <li>
+        <b><i>name :</i></b>
+        <input
+          type="text"
+          id="name"
+          value="<%= product.name %>"
+          name="name"
+          placeholder="name"
+        />
+      </li>
+      <li>
+        <b><i>price :</i></b>
+        <input
+          type="number"
+          id="price"
+          value="<%= product.price %>"
+          name="price"
+          placeholder="price"
+        />
+      </li>
+      <li>
+        <b><i>category :</i></b>
+        <select name="category" id="category" value="<%= product.category %>">
+          <option value="fruit"<%= product.category==="fruit"?"selected":"" %> >fruit</option>
+          <option value="vegatable"<%= product.category==="vegatable"?"selected":"" %>>vegatable</option>
+          <option value="dairy" <%= product.category==="dairy"?"selected":"" %>>dairy</option>
+        </select>
+      </li>
+      <hr />
+      <button>save new edit</button>
+    </form>
+    <a href="/products/<%= product.id %>"><button>cansel</button></a>
+  </body>
+</html>
