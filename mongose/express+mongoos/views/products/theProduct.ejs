@@ -11,10 +11,18 @@
 
     <li><b>name :</b><%= product.name %></li>
     <li><b>price :</b><%= product.price %></li>
-    <li><b> category :</b><%= product.category %></li>
+    <li>
+      <b> category :</b
+      ><a href="/products?category=<%= product.category %> "
+        ><%= product.category %></a
+      >
+    </li>
 
     <hr />
     <a href="/products/"><button>show product</button></a>
     <a href="/products/<%= product.id %>/edit"><button>edit product</button></a>
+    <form action="/products/<%= product._id %>?_method=DELETE" method="POST">
+      <button>delete</button>
+    </form>
   </body>
 </html>
