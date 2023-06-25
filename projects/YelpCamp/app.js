@@ -1,9 +1,10 @@
 const express = require("express");
-const app = express();
 const path = require("path");
 const methodOverride = require("method-override");
 const Campground = require("./models/campground");
 const mongoose = require("mongoose");
+const ejsMate = require("ejs-mate"); //this for layout to put all the html in it like cjs if you remmeber
+const app = express();
 mongoose
   .connect("mongodb://127.0.0.1:27017/yelp-camp", {
     useNewUrlParser: true,
@@ -20,10 +21,12 @@ mongoose
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
+app.engine("ejs", ejsMate); // this for ejsMate if you delete it the file can't render in layout like body open layout folder and boilderplate to understand or open index.ejs
+//...that mean this engine to load body inside layout
 
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
-
+// ================================== methods ==============================
 app.get("/", (req, res) => {
   res.render("home");
 });

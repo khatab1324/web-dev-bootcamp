@@ -25,10 +25,14 @@ const seedDB = async () => {
     const camp = new Campground({
       location: `${cities[random1000].city}, ${cities[random1000].state}`,
       title: `${sample(descriptors)} ${sample(places)}`,
+      imge: "https://source.unsplash.com/user/wsanter",
+      discription:
+        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Perferendis possimus architecto magni, quia maiores dolor, omnis totam ullam, nulla odio eaque qui perspiciatis et? Quos deleniti non animi fuga ex?",
+      price: Math.floor(Math.random() * 50) + 1,
     });
     await camp.save();
   }
 };
 seedDB().then(() => {
-  mongoose.connection.close();
+  mongoose.connection.close(); //conected and close
 });
