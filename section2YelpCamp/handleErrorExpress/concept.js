@@ -8,7 +8,7 @@ app.use(morgan("tiny"));
 //make function for error
 
 const error = () => {
-  throw new AppError("you need password!", 401);
+  throw new AppError("you need password", 401);
 };
 // function to cheack the password
 const verifyPassword = (req, res, next) => {
@@ -35,6 +35,11 @@ app.get("/error", (req, res) => {
 //===================================================
 app.use((req, res) => {
   res.status(404).send(`this page not found`);
+});
+
+app.use((err, req, res, next) => {
+  const { status = 500, message = "Something Went Wrong" } = err;
+  res.status(status).send(message);
 });
 
 // this middelwere handling errors
