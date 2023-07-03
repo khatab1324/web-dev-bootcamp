@@ -30,13 +30,15 @@ const categories = ["fruit", "vegetable", "dairy"];
 
 function wrapAsync(fn) {
   return function (req, res, next) {
-    fn(req, res, next).catch((e) => next(e));
+    //this fuction excute the under function
+    fn(req, res, next).catch((e) => next(e)); //if there error catch will work
   };
-}
+} //this fucntoin rether then write every time try and catch //it handle the error
 
 app.get(
   "/products",
   wrapAsync(async (req, res, next) => {
+    //here i use wrapAsunc function that is above ^
     const { category } = req.query;
     if (category) {
       const products = await Product.find({ category });
@@ -55,35 +57,36 @@ app.get("/products/new", (req, res) => {
 app.post(
   "/products",
   wrapAsync(async (req, res, next) => {
+    //here i use wrapAsync function that
     const newProduct = new Product(req.body);
     await newProduct.save();
     res.redirect(`/products/${newProduct._id}`);
   })
 );
 
-app.get(
-  "/products/:id",
-  wrapAsync(async (req, res, next) => {
-    const { id } = req.params;
-    const product = await Product.findById(id);
-    if (!product) {
-      throw new AppError("Product Not Found", 404);
-    }
-    res.render("products/show", { product });
-  })
-);
+app.get("/products/:id", async (req, res, next) => {
+  //we add next because xpress will catch and process them
+  const { id } = req.params;
+  const product = await Product.findById(id);
+  if (!product) {
+    return next(new AppError("Product Not Found", 404)); //i put next rether then throw the resone down
+  } //For errors returned from asynchronous functions invoked by route handlers and middleware,
+  // .... you must pass them to the next() function, where Express will catch and process them
+  res.render("products/show", { product }); //if there is error and if you don't pass a return you will get error in the terminal because there is no name or product
+});
 
-app.get(
-  "/products/:id/edit",
-  wrapAsync(async (req, res, next) => {
+app.get("/products/:id/edit", async (req, res, next) => {
+  try {
     const { id } = req.params;
     const product = await Product.findById(id);
     if (!product) {
       throw new AppError("Product Not Found", 404);
     }
     res.render("products/edit", { product, categories });
-  })
-);
+  } catch (error) {
+    next(error);
+  } //you don't need return next because you use try and catch
+});
 
 app.put(
   "/products/:id",
