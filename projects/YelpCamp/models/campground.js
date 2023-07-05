@@ -7,6 +7,13 @@ const CampgroundSchema = new Schema({
   imge: String,
   discription: String,
   location: String,
+  //this call mongoose relationship there is hole section descose that
+  reviews: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Review",
+    },
+  ],
 });
 
 module.exports = mongoose.model("Campground", CampgroundSchema);

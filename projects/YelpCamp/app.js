@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require("path");
 const catchAsync = require("./utils/catchAsync");
+const Review = require("./models/review");
 const ExpressError = require("./utils/ExpressError");
 const methodOverride = require("method-override");
 const Campground = require("./models/campground");
@@ -122,6 +123,19 @@ app.delete(
     res.redirect("/campgrounds");
   })
 );
+
+app.post("/campgrounds/:id/reviews", async (req, res) => {
+  const campground = await Campground.findById(req.params.id);
+  //this will middlewere for that req that come from (form)in show.ejs
+  const newReview = new Review(req.body.review); //that is because we are give the body or the rating kay
+  // in show.ejs you will find review[body] review[rating] that is keys
+  //now we will push the newReview to campground
+  campground.reviews.push(newReview);
+  //now we will save them
+  await newReview.save();
+  await campground.save();
+  res.redirect(`/campgrounds/${campground._id}`);
+});
 
 app.all("*", (req, res, next) => {
   //this will work if every thing else not working

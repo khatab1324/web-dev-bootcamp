@@ -22,5 +22,15 @@ const farmSchema = new Schema({
   ],
 });
 
+// DELETE ALL ASSOCIATED PRODUCTS AFTER A FARM IS DELETED//and this is middlewere
+farmSchema.post("findOneAndDelete", async function (farm) {
+  //when we use async we aculy don't need use next()
+  //....becuase it return a promice
+  if (farm.products.length) {
+    const res = await Product.deleteMany({ _id: { $in: farm.products } });
+    console.log(res);
+  }
+});
+
 const Farm = mongoose.model("Farm", farmSchema);
 module.exports = Farm; //creating and exporting the Farm model.This makes it so we can import the model into other parts of the program
