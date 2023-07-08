@@ -6,10 +6,11 @@ const ExpressError = require("./utils/ExpressError");
 const methodOverride = require("method-override");
 const Campground = require("./models/campground");
 const mongoose = require("mongoose");
-const { campgroundSchema } = require("./schemas");
+const { campgroundSchema, reviewSchema } = require("./schemas");
 const Joi = require("joi");
 const ejsMate = require("ejs-mate"); //this for layout to put all the html in it like cjs if you remmeber
 const { error } = require("console");
+const review = require("./models/review");
 const app = express();
 mongoose
   .connect("mongodb://127.0.0.1:27017/yelp-camp", {
@@ -33,25 +34,20 @@ app.engine("ejs", ejsMate); // this for ejsMate if you delete it the file can't 
 //========================= middlewere=========================
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
-const validation = (req, res, next) => {
-  // now we will use joi
-  const campgroundSchema = Joi.object({
-    //this not like mongoose schema no , its validate the valuse before send them to mongoose ,its like validation
 
-    campground: Joi.object({
-      //campground its array ,that have all the valuse of input like price tittle ...
-      title: Joi.string().required(),
-      price: Joi.number().required().min(0),
-      image: Joi.string().required(),
-      location: Joi.string().required(),
-      description: Joi.string().required(),
-    }).required(),
-  });
-  //now we should pass our data throw schema
+const validateCampground = (req, res, next) => {
   const { error } = campgroundSchema.validate(req.body);
-  console.log(error);
   if (error) {
-    const msg = error.details.map((element) => element.message).join(","); //we map the details because it is obj
+    const msg = error.details.map((el) => el.message).join(",");
+    throw new ExpressError(msg, 400);
+  } else {
+    next();
+  }
+};
+const validateReview = (req, res, next) => {
+  const { error } = reviewSchema.validate(req.body);
+  if (error) {
+    const msg = error.details.map((el) => el.message).join(",");
     throw new ExpressError(msg, 400);
   } else {
     next();
@@ -75,7 +71,7 @@ app.get("/campgrounds/new", (req, res) => {
 //rether then using try and catch we call fucntion that catch the error
 app.post(
   "/campgrounds",
-  validation,
+  validateCampground,
   catchAsync(async (req, res, next) => {
     console.log(req.body);
     // if (!req.body.campground)
@@ -91,7 +87,9 @@ app.post(
 app.get(
   "/campgrounds/:id",
   catchAsync(async (req, res) => {
-    const campground = await Campground.findById(req.params.id);
+    const campground = await Campground.findById(req.params.id).populate(
+      "reviews"
+    ); //remember campground have reveiw inside it bu its Id becuase of that I call populate
     res.render("campgrounds/show", { campground });
   })
 );
@@ -106,6 +104,7 @@ app.get(
 
 app.put(
   "/campgrounds/:id",
+  validateCampground,
   catchAsync(async (req, res) => {
     const { id } = req.params;
     const campground = await Campground.findByIdAndUpdate(id, {
@@ -124,7 +123,7 @@ app.delete(
   })
 );
 
-app.post("/campgrounds/:id/reviews", async (req, res) => {
+app.post("/campgrounds/:id/reviews", validateReview, async (req, res) => {
   const campground = await Campground.findById(req.params.id);
   //this will middlewere for that req that come from (form)in show.ejs
   const newReview = new Review(req.body.review); //that is because we are give the body or the rating kay
@@ -136,6 +135,22 @@ app.post("/campgrounds/:id/reviews", async (req, res) => {
   await campground.save();
   res.redirect(`/campgrounds/${campground._id}`);
 });
+app.delete(
+  "/campgrounds/:campId/reviews/:reviewId",
+  //you should know :campId it is not required that mean you can write :id
+
+  catchAsync(async (req, res) => {
+    const { campId, reviewId } = req.params;
+    // we should remove the refrens Object id in campground for this review not for all review , just this review
+    const deleteRefreceObjectIdInCampground =
+      await Campground.findByIdAndUpdate(campId, {
+        $pull: { reviews: reviewId }, // $pull  operator removes from an existing array all instances of a value or values that match a specified condition.
+        // that mean pull goes to reviews and pull that value in our case reviewId and reviewId will not be exist any more in campground,you can find pull in mongoDB
+      });
+    const deleteReview = await Review.findByIdAndDelete(reviewId);
+    res.redirect(`/campgrounds/${campId}`);
+  })
+);
 
 app.all("*", (req, res, next) => {
   //this will work if every thing else not working
