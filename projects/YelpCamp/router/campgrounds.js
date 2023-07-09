@@ -42,6 +42,9 @@ router.post(
 
     const campground = new Campground(req.body.campground);
     await campground.save();
+    req.flash("success", "Successfully made a new campground!"); //here i spacifay the flash
+    // we have res.locals.success = req.flash("success"); this locals we don't need to pass it to ejs
+    // ...it just will take the message that above and pass it to ejs
     res.redirect(`/campgrounds/${campground._id}`);
   })
 );
@@ -52,6 +55,12 @@ router.get(
     const campground = await Campground.findById(req.params.id).populate(
       "reviews"
     ); //remember campground have reveiw inside it bu its Id becuase of that I call populate
+    if (!campground) {
+      req.flash("error", "Cannot find that campground!");
+      // we have res.locals.success = req.flash("success"); this locals we don't need to pass it to ejs
+      // ...it just will take the message that above and pass it to ejs
+      return res.redirect("/campgrounds");
+    }
     res.render("campgrounds/show", { campground });
   })
 );
@@ -60,6 +69,13 @@ router.get(
   "/campgrounds/:id/edit",
   catchAsync(async (req, res) => {
     const campground = await Campground.findById(req.params.id);
+    if (!campground) {
+      //it is happen if you delete campground and you have url like this http://localhost:2023/campgrounds/649711d1e12afc7dfda441cd this message wil shown to you
+      req.flash("error", "Cannot find that campground!");
+      // we have res.locals.success = req.flash("success"); this locals we don't need to pass it to ejs
+      // ...it just will take the message that above and pass it to ejs
+      return res.redirect("/campgrounds");
+    }
     res.render("campgrounds/edit", { campground });
   })
 );
@@ -72,6 +88,9 @@ router.put(
     const campground = await Campground.findByIdAndUpdate(id, {
       ...req.body.campground,
     });
+    req.flash("success", "Successfully updated campground!");
+    // we have res.locals.success = req.flash("success"); this locals we don't need to pass it to ejs
+    // ...it just will take the message that above and pass it to ejs
     res.redirect(`/campgrounds/${campground._id}`);
   })
 );
@@ -81,6 +100,9 @@ router.delete(
   catchAsync(async (req, res) => {
     const { id } = req.params;
     await Campground.findByIdAndDelete(id); //if change the findByIdAndDelete the mongose middlewere (findOneAndDelete)will not work, becuase it can't trigger the middlware
+    req.flash("success", "Successfully deleted campground");
+    // we have res.locals.success = req.flash("success"); this locals we don't need to pass it to ejs
+    // ...it just will take the message that above and pass it to ejs
     res.redirect("/campgrounds");
   })
 );

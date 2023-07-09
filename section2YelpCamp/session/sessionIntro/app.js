@@ -23,7 +23,7 @@ app.use(session(sessionOptions)); //if you open the terminal without resave and 
 // saveUninitialized
 // Forces a session that is "uninitialized" to be saved to the store. A session is uninitialized when it is new but not modified. Choosing false is useful for implementing login sessions, reducing server storage usage, or complying with laws that require permission before setting a cookie. Choosing false will also help with race conditions where a client makes multiple parallel requests without a session.
 // ..........The default value is true, but using the default has been deprecated, as the default will change in the future. Please research into this setting and choose what is appropriate to your use-case.
-// ..........Note if you are using Session in conjunction with PassportJS, Passport will add an empty Passport object to the session for use after a user is authenticated, which will be treated as a modification to the session, causing it to be saved. This has been fixed in PassportJS 0.3.0
+// ..........Note: if you are using Session in conjunction with PassportJS, Passport will add an empty Passport object to the session for use after a user is authenticated, which will be treated as a modification to the session, causing it to be saved. This has been fixed in PassportJS 0.3.0
 
 app.get("/", (req, res) => {
   //if you open the cookies in browser you will find connect.sid that maked by express-session
@@ -37,6 +37,13 @@ app.get("/", (req, res) => {
 });
 // Warning:
 //  The default server-side session storage, MemoryStore, is purposely not designed for a production environment. It will leak memory under most conditions, does not scale past a single process, and is meant for debugging and developing.
+
+app.get('/register', (req, res) => {
+    // if the username is not difine make it value Anonymous
+    const { username = 'Anonymous' } = req.query;
+    req.session.username = username;
+    res.redirect('/greet')
+})
 const port = 2777;
 app.listen(port, () => {
   console.log(`HI I am listen port ${port}`);

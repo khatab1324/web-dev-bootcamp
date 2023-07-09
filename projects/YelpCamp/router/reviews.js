@@ -29,6 +29,7 @@ router.post("/campgrounds/:id/reviews", validateReview, async (req, res) => {
   //now we will save them
   await newReview.save();
   await campground.save();
+  req.flash("success", "Created new review!");
   res.redirect(`/campgrounds/${campground._id}`);
 });
 router.delete(
@@ -44,6 +45,7 @@ router.delete(
         // that mean pull goes to reviews and pull that value in our case reviewId and reviewId will not be exist any more in campground,you can find pull in mongoDB
       });
     const deleteReview = await Review.findByIdAndDelete(reviewId);
+    req.flash("success", "Successfully deleted review");
     res.redirect(`/campgrounds/${campId}`);
   })
 );
