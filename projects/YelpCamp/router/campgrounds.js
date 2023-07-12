@@ -27,7 +27,7 @@ router.get(
   "/campgrounds",
   catchAsync(async (req, res) => {
     const campgrounds = await Campground.find({});
-    res.render("campgrounds/index", { campgrounds,});
+    res.render("campgrounds/index", { campgrounds });
   })
 );
 router.get("/campgrounds/new", isLoggedIn, (req, res) => {
@@ -45,6 +45,7 @@ router.post(
     //   throw new ExpressError("Invalid Campground Data", 400);
 
     const campground = new Campground(req.body.campground);
+    campground.author = req.user._id; //req.user it automatically add by passport
     await campground.save();
     req.flash("success", "Successfully made a new campground!"); //here i spacifay the flash
     // we have res.locals.success = req.flash("success"); this locals we don't need to pass it to ejs
@@ -56,9 +57,9 @@ router.post(
 router.get(
   "/campgrounds/:id",
   catchAsync(async (req, res) => {
-    const campground = await Campground.findById(req.params.id).populate(
-      "reviews"
-    ); //remember campground have reveiw inside it bu its Id becuase of that I call populate
+    const campground = await Campground.findById(req.params.id)
+      .populate("reviews")
+      .populate("author"); //to have access to auther name //remember campground have reveiw inside it bu its Id becuase of that I call populate
     if (!campground) {
       req.flash("error", "Cannot find that campground!");
       // we have res.locals.success = req.flash("success"); this locals we don't need to pass it to ejs
@@ -90,10 +91,16 @@ router.put(
   isLoggedIn,
   validateCampground,
   catchAsync(async (req, res) => {
+    const campground = await Campground.findById(id);
+    if (!campground.author.equals(req.user._id)) {
+      //here I check the currentUser is the same author who is create this campground
+      req.flash("error", "You do not have permission to do that!");
+      return res.redirect(`/campgrounds/${id}`);
+    }
     const { id } = req.params;
-    const campground = await Campground.findByIdAndUpdate(id, {
-      ...req.body.campground,
-    });
+    // const campground = await Campground.findByIdAndUpdate(id, {
+    // ...req.body.campground,
+    // });
     req.flash("success", "Successfully updated campground!");
     // we have res.locals.success = req.flash("success"); this locals we don't need to pass it to ejs
     // ...it just will take the message that above and pass it to ejs
