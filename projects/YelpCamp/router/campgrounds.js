@@ -3,14 +3,17 @@ const catchAsync = require("../utils/catchAsync");
 const { campgroundSchema } = require("../schemas.js");
 const ExpressError = require("../utils/ExpressError");
 const Campground = require("../models/campground");
+const { isLoggedIn } = require("../middleware");
 // ===========require libary====================
 const express = require("express");
 const { models } = require("mongoose");
 const router = express.Router();
+// we expects you to have these dependencies installed. install three passport /passport local/passport local monoose
+// npm install passport mongoose passport-local-mongoose
 //===========middleware========================
 
 // ==========validation========================
-const validateCampground = (req, res, next) => {
+function validateCampground(req, res, next) {
   const { error } = campgroundSchema.validate(req.body);
   if (error) {
     const msg = error.details.map((el) => el.message).join(",");
@@ -18,21 +21,22 @@ const validateCampground = (req, res, next) => {
   } else {
     next();
   }
-};
+}
 // ==========campgrounds=======================
 router.get(
   "/campgrounds",
   catchAsync(async (req, res) => {
     const campgrounds = await Campground.find({});
-    res.render("campgrounds/index", { campgrounds });
+    res.render("campgrounds/index", { campgrounds,});
   })
 );
-router.get("/campgrounds/new", (req, res) => {
+router.get("/campgrounds/new", isLoggedIn, (req, res) => {
   res.render("campgrounds/new");
 });
 //rether then using try and catch we call fucntion that catch the error
 router.post(
   "/campgrounds",
+  isLoggedIn,
   validateCampground,
   catchAsync(async (req, res, next) => {
     console.log(req.body);
@@ -67,6 +71,7 @@ router.get(
 
 router.get(
   "/campgrounds/:id/edit",
+  isLoggedIn,
   catchAsync(async (req, res) => {
     const campground = await Campground.findById(req.params.id);
     if (!campground) {
@@ -82,6 +87,7 @@ router.get(
 
 router.put(
   "/campgrounds/:id",
+  isLoggedIn,
   validateCampground,
   catchAsync(async (req, res) => {
     const { id } = req.params;
@@ -97,6 +103,7 @@ router.put(
 
 router.delete(
   "/campgrounds/:id",
+  isLoggedIn,
   catchAsync(async (req, res) => {
     const { id } = req.params;
     await Campground.findByIdAndDelete(id); //if change the findByIdAndDelete the mongose middlewere (findOneAndDelete)will not work, becuase it can't trigger the middlware

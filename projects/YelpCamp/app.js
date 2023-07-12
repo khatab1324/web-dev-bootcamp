@@ -5,6 +5,8 @@ const mongoose = require("mongoose");
 const ejsMate = require("ejs-mate"); //this for layout to put all the html in it like cjs if you remmeber
 const session = require("express-session");
 const flash = require("connect-flash");
+const passport = require("passport");
+const LocalStrategy = require("passport-local");
 const app = express();
 // =======================require file ==========================
 const catchAsync = require("./utils/catchAsync");
@@ -12,6 +14,10 @@ const ExpressError = require("./utils/ExpressError");
 const methodOverride = require("method-override");
 const campgroundsRouter = require("./router/campgrounds");
 const reviewsRouter = require("./router/reviews");
+const User = require("./models/user");
+const userRoutes = require("./router/user");
+
+mongoose.set("strictQuery", false); //DeprecationWarning: Mongoose: the `strictQuery` option will be switched back to `false` by default in Mongoose 7. Use `mongoose.set('strictQuery', false);` if you want to prepare for this change. Or use `mongoose.set('strictQuery', true);` to suppress this warning.
 mongoose
   .connect("mongodb://127.0.0.1:27017/yelp-camp", {
     useNewUrlParser: true,
@@ -54,16 +60,56 @@ app.use(express.static(path.join(__dirname, "public"))); //I tell express use pu
 // ....and use it if you call it from evry where just call it
 
 app.use(flash()); //I use flash ,that short action happen for one like when you add product it show you product add ,when you refresh it will goes
+
+// ==========passport===================
+// they must be under session
+//passport update and passport initialize doesn't exist yet but i just follow code colt
+app.use(passport.initialize()); //It just tells us that we need that passport.Session middleware if we want persistent login sessions versus the alternative would be having to login on every single request,
+//that meanis a middle-ware that initialises Passport.Intializes Passport for incoming requests, allowing authentication strategies to be applied.
+app.use(passport.session()); //is another middleware that alters the request object and change the 'user' value that is currently the session id (from the client cookie) into the true deserialized user object.
+// for more explain https://stackoverflow.com/questions/46644366/what-is-passport-initialize-nodejs-express/46645936#46645936
+
+//you must know the passport.initialize() and passport.session()) .That all has to do with how information is stored and retrieved from the session anyway.
+
+passport.use(new LocalStrategy(User.authenticate())); //So what we're saying here is that, hello, passports.We would like you to use the local strategy that we have downloaded and required.
+//....And for that local strategy, the authentication method is going to be located on our user model andit's called authenticate.
+//... we don't have method called authentication we made , but its come from But again, it's coming from this passport local mongoose
+//authenticate() Generates a function that is used in Passport's LocalStrategy
+
+passport.serializeUser(User.serializeUser()); //This is telling passports how to serialize a user.
+//And serialization refers to basically how do we get data or how do we store a user in the session?
+// that mean its Generates a function that is used by Passport to serialize users into the session
+
+passport.deserializeUser(User.deserializeUser()); //How do you get a user out of that session?
+
+// ========================middleware flash and passport =================
+// I can't put it above because the currentUser debend on serializeUser and deserializer if you put it above them the currentUser will be undifine
 app.use((req, res, next) => {
   //this for using flash every where
+  console.log(req.session);
+  res.locals.currentUser = req.user; //I explain it in middleware.js req.user ,the passport will deal with it
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
+  //i can use any of this variable in every where
+
   next();
 });
 //====================use router====================
 app.use("/", campgroundsRouter);
 app.use(reviewsRouter);
+app.use(userRoutes);
 // ================================== methods ==============================
+// app.get("/fackUser", async (req, res) => {
+//   const user = new User({
+//     //in our Schema we have email and username do put more then email or username
+//     email: "khatab@gmail.com",
+//     username: "ks1",
+//   });
+//   const newUser = await User.register(user, "12345678"); //register(user, password, cb) Convenience method to register a new user instance with a given password.
+
+//   res.send(newUser); //look it have hash and  salt and username  and email
+// });
+
 app.get("/", (req, res) => {
   res.render("home");
 });

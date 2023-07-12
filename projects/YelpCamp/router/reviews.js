@@ -6,6 +6,7 @@ const Review = require("../models/review");
 const { reviewSchema } = require("../schemas.js");
 const ExpressError = require("../utils/ExpressError");
 const catchAsync = require("../utils/catchAsync");
+const { isLoggedIn } = require("../middleware");
 // ===================validation================
 const validateReview = (req, res, next) => {
   const { error } = reviewSchema.validate(req.body);
@@ -19,21 +20,27 @@ const validateReview = (req, res, next) => {
 
 //==================reviews======================
 
-router.post("/campgrounds/:id/reviews", validateReview, async (req, res) => {
-  const campground = await Campground.findById(req.params.id);
-  //this will middlewere for that req that come from (form)in show.ejs
-  const newReview = new Review(req.body.review); //that is because we are give the body or the rating kay
-  // in show.ejs you will find review[body] review[rating] that is keys
-  //now we will push the newReview to campground
-  campground.reviews.push(newReview);
-  //now we will save them
-  await newReview.save();
-  await campground.save();
-  req.flash("success", "Created new review!");
-  res.redirect(`/campgrounds/${campground._id}`);
-});
+router.post(
+  "/campgrounds/:id/reviews",
+  validateReview,
+  isLoggedIn,
+  async (req, res) => {
+    const campground = await Campground.findById(req.params.id);
+    //this will middlewere for that req that come from (form)in show.ejs
+    const newReview = new Review(req.body.review); //that is because we are give the body or the rating kay
+    // in show.ejs you will find review[body] review[rating] that is keys
+    //now we will push the newReview to campground
+    campground.reviews.push(newReview);
+    //now we will save them
+    await newReview.save();
+    await campground.save();
+    req.flash("success", "Created new review!");
+    res.redirect(`/campgrounds/${campground._id}`);
+  }
+);
 router.delete(
   "/campgrounds/:campId/reviews/:reviewId",
+  isLoggedIn,
   //you should know :campId it is not required that mean you can write :id
 
   catchAsync(async (req, res) => {
