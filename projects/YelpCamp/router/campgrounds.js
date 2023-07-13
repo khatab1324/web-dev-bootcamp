@@ -101,6 +101,10 @@ router.put(
     // const campground = await Campground.findByIdAndUpdate(id, {
     // ...req.body.campground,
     // });
+    if (!campground.author.equals(req.user._id)) {
+      //here I compa
+      req.flash("error", "you are not the author");
+    }
     req.flash("success", "Successfully updated campground!");
     // we have res.locals.success = req.flash("success"); this locals we don't need to pass it to ejs
     // ...it just will take the message that above and pass it to ejs
