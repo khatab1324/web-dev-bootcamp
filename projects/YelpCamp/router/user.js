@@ -63,7 +63,7 @@ router.post(
     req.flash("success", "welcome back!");
     console.log(req.session.returnTo);
     const redirectUrl = res.locals.returnTo || "/campgrounds"; //if the req.session.returnTo is not define let the redirctUrl ecual campgrounds
-   // in 529 show you how to fix the redirect issue very very important
+    // in 529 show you how to fix the redirect issue very very important
     res.redirect(redirectUrl);
   }
 );

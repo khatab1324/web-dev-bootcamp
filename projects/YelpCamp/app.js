@@ -86,7 +86,6 @@ passport.deserializeUser(User.deserializeUser()); //How do you get a user out of
 // I can't put it above because the currentUser debend on serializeUser and deserializer if you put it above them the currentUser will be undifine
 app.use((req, res, next) => {
   //this for using flash every where
-  console.log(req.session);
   res.locals.currentUser = req.user; //I explain it in middleware.js req.user ,the passport will deal with it
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");

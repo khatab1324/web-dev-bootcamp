@@ -11,7 +11,7 @@ const CampgroundSchema = new Schema({
   location: String,
   //this call mongoose relationship there is hole section descose that
   author: {
-    //this is authorzation that check this review for this user , to edit on it or remove it
+    //this is authorzation that check this campground for this user , to edit on it or remove it
     type: Schema.Types.ObjectId,
     ref: "User",
   },

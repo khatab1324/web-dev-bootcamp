@@ -3,20 +3,10 @@ const router = express.Router({ mergeParams: true });
 // ============require files=================
 const Campground = require("../models/campground");
 const Review = require("../models/review");
-const { reviewSchema } = require("../schemas.js");
-const ExpressError = require("../utils/ExpressError");
 const catchAsync = require("../utils/catchAsync");
-const { isLoggedIn } = require("../middleware");
-// ===================validation================
-const validateReview = (req, res, next) => {
-  const { error } = reviewSchema.validate(req.body);
-  if (error) {
-    const msg = error.details.map((el) => el.message).join(",");
-    throw new ExpressError(msg, 400);
-  } else {
-    next();
-  }
-};
+// ===================middleware================
+const { validateReview, isLoggedIn, isReviewAuthor } = require("../middleware");
+const review = require("../models/review");
 
 //==================reviews======================
 
@@ -30,10 +20,11 @@ router.post(
     const newReview = new Review(req.body.review); //that is because we are give the body or the rating kay
     // in show.ejs you will find review[body] review[rating] that is keys
     //now we will push the newReview to campground
-    campground.reviews.push(newReview);
+    campground.reviews.push(newReview); //I push newReview like array
+    newReview.author = req.user._id;
     //now we will save them
     await newReview.save();
-    await campground.save();
+    await campground.save(); //becuase the campground have review in array
     req.flash("success", "Created new review!");
     res.redirect(`/campgrounds/${campground._id}`);
   }
@@ -41,6 +32,7 @@ router.post(
 router.delete(
   "/campgrounds/:campId/reviews/:reviewId",
   isLoggedIn,
+  isReviewAuthor,
   //you should know :campId it is not required that mean you can write :id
 
   catchAsync(async (req, res) => {
