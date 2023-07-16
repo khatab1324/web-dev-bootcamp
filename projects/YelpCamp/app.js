@@ -1,3 +1,11 @@
+//this for dotenv//processed invoice node environment is an environment variable that is usually just development
+//....we're saying if we're running in development mode.if we're in development, yes, we are in development require the EMV package, which is going to take the variables I've defined in .env file and add them into processed
+//it's mean it take secret file and add it here
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
+//new we can access to this key in any file
+// console.log(process.env.SECRET);//i comment the SECRET
 // =================require laibary============================
 const express = require("express");
 const path = require("path");
@@ -8,7 +16,9 @@ const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const multer = require("multer"); //it use for upoalde imge and file //usage :Multer adds a body object and a file or files object to the request object. The body object contains the values of the text fields of the form, the file or files object contains the files uploaded via the form.
-const upload = multer({ dest: "uploads/" }); //here you specify the destination for where you will save your file //this just a demo in real world ,we don't save our fail locally
+const { storage } = require("./cloudinary"); //it auto will know index.js file
+// const upload = multer({ dest: "uploads/" }); //here you specify the destination for where you will save your file //this just a demo in real world ,we don't save our fail locally
+const upload = multer({ storage }); //here you tell the muter to save the data in cloudinter
 const app = express();
 // =======================require file ==========================
 const catchAsync = require("./utils/catchAsync");
