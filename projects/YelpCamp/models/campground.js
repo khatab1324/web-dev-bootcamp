@@ -6,7 +6,10 @@ const Schema = mongoose.Schema;
 const CampgroundSchema = new Schema({
   title: String,
   price: Number,
-  imge: String,
+  imge: {
+    url: String,
+    filename: String,
+  },
   discription: String,
   location: String,
   //this call mongoose relationship there is hole section descose that

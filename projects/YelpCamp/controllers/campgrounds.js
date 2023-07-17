@@ -14,11 +14,15 @@ module.exports.createCampground = async (req, res, next) => {
   // if (!req.body.campground)
   //   //this tell if the data emtdy like title price imge all of this emtdy throw error
   //   throw new ExpressError("Invalid Campground Data", 400);
-
   const campground = new Campground(req.body.campground);
+  campground.imge = req.files.map((f) => ({
+    url: f.path,
+    filename: f.filename,
+  })); //i need to return object becuase of that I need to wrap it with pranthecess()
   //NOTE : the user must be login to req.user be difine
   campground.author = req.user._id; //req.user it automatically add by passport
   await campground.save();
+  console.log("camground");
   req.flash("success", "Successfully made a new campground!"); //here i spacifay the flash
   // we have res.locals.success = req.flash("success"); this locals we don't need to pass it to ejs
   // ...it just will take the message that above and pass it to ejs
