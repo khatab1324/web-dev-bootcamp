@@ -15,10 +15,10 @@ const session = require("express-session");
 const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
-const multer = require("multer"); //it use for upoalde imge and file //usage :Multer adds a body object and a file or files object to the request object. The body object contains the values of the text fields of the form, the file or files object contains the files uploaded via the form.
-const { storage } = require("./cloudinary"); //it auto will know index.js file
+const multer = require("multer"); //it use for upoalde image and file //usage :Multer adds a body object and a file or files object to the request object. The body object contains the values of the text fields of the form, the file or files object contains the files uploaded via the form.
+// const { storage } = require("./cloudinary"); //it auto will know index.js file
 // const upload = multer({ dest: "uploads/" }); //here you specify the destination for where you will save your file //this just a demo in real world ,we don't save our fail locally
-const upload = multer({ storage }); //here you tell the muter to save the data in cloudinter
+// const upload = multer({ storage }); //here you tell the muter to save the data in cloudinter
 const app = express();
 // =======================require file ==========================
 const catchAsync = require("./utils/catchAsync");

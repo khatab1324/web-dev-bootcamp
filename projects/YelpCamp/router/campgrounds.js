@@ -6,7 +6,7 @@ const campgroundControllers = require("../controllers/campgrounds");
 // ===========require libary====================
 const express = require("express");
 const { models } = require("mongoose");
-const multer = require("multer"); //it use for upoalde imge and file //usage :Multer adds a body object and a file or files object to the request object. The body object contains the values of the text fields of the form, the file or files object contains the files uploaded via the form.
+const multer = require("multer"); //it use for upoalde image and file //usage :Multer adds a body object and a file or files object to the request object. The body object contains the values of the text fields of the form, the file or files object contains the files uploaded via the form.
 // const upload = multer({ dest: "uploads/" }); //here you specify the destination for where you will save your file //this just a demo in real world ,we don't save our fail locally
 const { storage } = require("../cloudinary"); //it auto will know index.js file
 // const upload = multer({ dest: "uploads/" }); //here you specify the destination for where you will save your file //this just a demo in real world ,we don't save our fail locally
@@ -27,16 +27,16 @@ router
   ) //rether then using try and catch we call fucntion that catch the error
   .post(
     isLoggedIn,
-    upload.array("imge"),//we should download image before validate work, if we did't do this out validation will goes wrong
+    upload.array("images"), //we should download image before validate work, if we did't do this out validation will goes wrong
     validateCampground,
-    catchAsync(campgroundControllers.createCampground),
-    (req, res) => {
-      //upload.single(the piece should look at it)//and it upload for you one file
-      //if you use upload.array it will apload multiple file but you shoud attribut in input that in html called multiple
-      console.log(req.body, req.files); //now you can see the path its link for your imge or file you can copy it and pass it in browser   //req.file it send for you all info ubout file that had been send
-      //and if you notis he make file that called uploads
-      res.send("sended");
-    }
+    catchAsync(campgroundControllers.createCampground)
+    // (req, res) => {
+    //   //upload.single(the piece should look at it)//and it upload for you one file
+    //   //if you use upload.array it will apload multiple file but you shoud attribut in input that in html called multiple
+    //   console.log(req.body, req.files); //now you can see the path its link for your image or file you can copy it and pass it in browser   //req.file it send for you all info ubout file that had been send
+    //   //and if you notis he make file that called uploads
+    //   res.send("sended");
+    // }
   );
 
 router.get("/campgrounds/new", isLoggedIn, campgroundControllers.renderNewForm);

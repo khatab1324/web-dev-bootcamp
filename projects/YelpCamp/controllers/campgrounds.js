@@ -1,4 +1,5 @@
 const Campground = require("../models/campground");
+const { cloudinary } = require("../cloudinary");
 
 module.exports.index = async (req, res) => {
   const campgrounds = await Campground.find({});
@@ -12,10 +13,10 @@ module.exports.renderNewForm = (req, res) => {
 module.exports.createCampground = async (req, res, next) => {
   //rether then using try and catch we call fucntion that catch the error
   // if (!req.body.campground)
-  //   //this tell if the data emtdy like title price imge all of this emtdy throw error
+  //   //this tell if the data emtdy like title price image all of this emtdy throw error
   //   throw new ExpressError("Invalid Campground Data", 400);
   const campground = new Campground(req.body.campground);
-  campground.imge = req.files.map((f) => ({
+  campground.images = req.files.map((f) => ({
     url: f.path,
     filename: f.filename,
   })); //i need to return object becuase of that I need to wrap it with pranthecess()
