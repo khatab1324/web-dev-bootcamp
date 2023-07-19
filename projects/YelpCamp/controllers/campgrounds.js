@@ -17,13 +17,15 @@ module.exports.createCampground = async (req, res, next) => {
   //   throw new ExpressError("Invalid Campground Data", 400);
   const campground = new Campground(req.body.campground);
   campground.images = req.files.map((f) => ({
+    //map work just in array bacause of that images should be array
     url: f.path,
     filename: f.filename,
-  })); //i need to return object becuase of that I need to wrap it with pranthecess()
+  }));
+  //i need to return object becuase of that I need to wrap it with pranthecess()
   //NOTE : the user must be login to req.user be difine
   campground.author = req.user._id; //req.user it automatically add by passport
   await campground.save();
-  console.log("camground");
+  console.log(campground);
   req.flash("success", "Successfully made a new campground!"); //here i spacifay the flash
   // we have res.locals.success = req.flash("success"); this locals we don't need to pass it to ejs
   // ...it just will take the message that above and pass it to ejs
@@ -64,10 +66,16 @@ module.exports.renderEditForm = async (req, res) => {
 
 module.exports.updateCampground = async (req, res) => {
   const { id } = req.params;
+  console.log(req.body)
   const campground = await Campground.findById(id);
   const camp = await Campground.findByIdAndUpdate(id, {
     ...req.body.campground,
   });
+  const imgs = req.files.map((f) => ({ url: f.path, filename: f.filename })); //this make array and we don't push entire array inside existing array because of that
+  //... I will make it inside imgs and spreade it and push like push the info into array
+  campground.images.push(...imgs); //we need to push because it exist
+
+  campground.save();
   req.flash("success", "Successfully updated campground!");
   // we have res.locals.success = req.flash("success"); this locals we don't need to pass it to ejs
   // ...it just will take the message that above and pass it to ejs

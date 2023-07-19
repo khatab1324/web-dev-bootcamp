@@ -6,10 +6,13 @@ const Schema = mongoose.Schema;
 const CampgroundSchema = new Schema({
   title: String,
   price: Number,
-  image: {
-    url: String,
-    filename: String,
-  },
+  images: [
+    //images exapte two things the first one url and filename
+    {
+      url: String,
+      filename: String,
+    },
+  ], //we need it to be array because we will use map
   discription: String,
   location: String,
   //this call mongoose relationship there is hole section descose that

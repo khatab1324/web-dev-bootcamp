@@ -27,7 +27,7 @@ router
   ) //rether then using try and catch we call fucntion that catch the error
   .post(
     isLoggedIn,
-    upload.array("images"), //we should download image before validate work, if we did't do this out validation will goes wrong
+    upload.array("image"), //we should download image before validate work, if we did't do this out validation will goes wrong
     validateCampground,
     catchAsync(campgroundControllers.createCampground)
     // (req, res) => {
@@ -42,12 +42,14 @@ router
 router.get("/campgrounds/new", isLoggedIn, campgroundControllers.renderNewForm);
 
 router
-  .route("/campgrouns/:id")
+  .route("/campgrounds/:id")
   .get(catchAsync(campgroundControllers.showCampground))
   .put(
     isLoggedIn,
-    validateCampground,
     isAuthor,
+    upload.array("image"), //it should before validateCampground becuase the error campground is require don't shown to you
+    validateCampground,
+
     catchAsync(campgroundControllers.updateCampground)
   )
   .delete(

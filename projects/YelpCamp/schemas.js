@@ -8,6 +8,7 @@ module.exports.campgroundSchema = Joi.object({
     location: Joi.string().required(),
     description: Joi.string().required(),
   }).required(),
+  deleteImages: Joi.array(), //you can find deleteImages in edit.ejs line 90
 });
 //its normalto add to module.exports
 module.exports.reviewSchema = Joi.object({

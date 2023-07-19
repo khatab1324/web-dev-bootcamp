@@ -7,6 +7,7 @@
       method="POST"
       novalidate
       class="validated-form"
+      enctype="multipart/form-data"
     >
       <div class="mb-3">
         <label class="form-label" for="title">Title</label>
@@ -32,18 +33,7 @@
         />
         <div class="valid-feedback">Looks good!</div>
       </div>
-      <div class="mb-3">
-        <label class="form-label" for="image">Image Url</label>
-        <input
-          class="form-control"
-          type="text"
-          id="image"
-          name="campground[image]"
-          value="<%=campground.image %>"
-          required
-        />
-        <div class="valid-feedback">Looks good!</div>
-      </div>
+
       <div class="mb-3">
         <label class="form-label" for="price">Campground Price</label>
         <div class="input-group">
@@ -58,7 +48,7 @@
             name="campground[price]"
             value="<%=campground.price %>"
             required
-          />
+          />\
           <div class="valid-feedback">Looks good!</div>
         </div>
       </div>
@@ -72,10 +62,41 @@
           name="campground[description]"
           required
         >
-<%= campground.discription%></textarea
+<%= campground.description%></textarea
         >
         <div class="valid-feedback">Looks good!</div>
       </div>
+
+      <div class="input-group mb-3">
+        <input
+          type="file"
+          class="form-control"
+          id="image"
+          name="image"
+          multiple
+        />
+        <label class="input-group-text" for="image">choose images</label>
+        <!-- colt steel do alot becuase he work on bootstrab 4 to show that image we upload but we in bootsrab 5 we don't need for code colt steel -->
+      </div>
+
+      <div class="mb-3">
+        <% campground.images.forEach(function(img, i) { %>
+
+        <img src="<%=img.url%>" class="img-fluid img-thumbnail" alt="" />
+        <div class="form-check-inline">
+          <input
+            type="checkbox"
+            id="image-<%=i%>"
+            name="deleteImages[]"
+            value="<%=img.filename%>"
+          />
+        </div>
+        <!-- the delete img will be deleteImages: [ 'YelpCamp/iz19vlp3g4q0gnpnw2z2' ] -->
+        <label for="image-<%=i%>">Delete?</label
+        ><!--i is index and if you open the console you will see like this imge-0 image-1 image-2 -->
+        <% })%>
+      </div>
+
       <div class="mb-3">
         <button class="btn btn-info">Update Campground</button>
       </div>
