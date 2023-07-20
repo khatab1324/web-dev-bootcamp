@@ -3,18 +3,41 @@ const { campgroundSchema } = require("../schemas");
 const Review = require("./review");
 const Schema = mongoose.Schema;
 
+// https://res.cloudinary.com/dd4vh5wfd/image/upload/w_300/v1689785532/YelpCamp/aer5rog0y8zhicnlhws8.jpg
+//look for this url it have w_300                    ^^^^^ here this is api trensform from cloudinary that let you control on img using url
+//this link for more https://cloudinary.com/documentation/image_transformations
+const ImageSchema = new Schema({
+  url: String,
+  filename: String,
+});
+// i have problem when you edit the the campground the tumbnail should show you the image but the problem is it show you one imge and when you upload new imge it shown you the number of episode is 555
+ImageSchema.virtual("thumbnail").get(function () {
+  //viirtual mean in every on evrey thumbnail
+  return this.url.replace("/upload", "/upload/w_200/"); //(this) refear to inside filname
+}); //So the reason we use a virtual in case you skipped that video is that we don't need to store this on our model or in the database because it's just derived from the information we're already storing. We're storing the URL. It's not like we're storing an image in Mongo, it's just a URL.So why store two? If we can just make a virtual property that will look to us to the human eye as if it's stored on or stored in our database. But it's not every time we call thumbnail, it's going to do this little calculation, which is it's very lightweight and that's fine. But instead of having slash upload, replace that with slash upload slash w 200 and also you should
+
 const CampgroundSchema = new Schema({
   title: String,
   price: Number,
   images: [
     //images exapte two things the first one url and filename
-    {
-      url: String,
-      filename: String,
-    },
+    ImageSchema,
   ], //we need it to be array because we will use map
   discription: String,
   location: String,
+  geometry: {
+    //its location
+    type: {
+      type: String, // Don't do `{ location: { type: String } }`
+      enum: ["Point"], // 'location.type' must be 'Point'
+      required: true,
+    },
+    coordinates: {
+      type: [Number],
+      required: true,
+    },
+  },
+
   //this call mongoose relationship there is hole section descose that
   author: {
     //this is authorzation that check this campground for this user , to edit on it or remove it

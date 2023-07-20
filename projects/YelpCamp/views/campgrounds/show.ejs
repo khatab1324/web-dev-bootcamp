@@ -2,6 +2,12 @@
 <link rel="stylesheet" href="/stylesheets/stars.css" />
 <!-- we use https://github.com/LunarLogic/starability for our stars -->
 
+<!-- I'm not going to be able to use that in this JavaScript file because of the way Edge's works is it takes this template and it just runs over.It finds all instances of the Edge's syntax and spits out regular HTML.But it doesn't go through my script.It doesn't go into my CSS or into my JavaScript.So if I'm just including a script, it doesn't think there's any Edge's syntax here just leaves that alone, and then my browser requires that script or it request the script and it loads and that code So this code runs in my browser and this makes no sense. -->
+<script>
+
+  const mapToken = "<%-process.env.MAPBOX_TOKEN%>";//to ejs insilizete at first and pass its value to showPageMap in public js file
+  const campground = <%- JSON.stringify(campground) %>//vscode is stupid don't look at it
+</script>
 <div class="row">
   <div class="col-6">
     <div id="campgroundCarousel" class="carousel slide" data-bs-ride="carousel">
@@ -132,5 +138,7 @@
       </div>
     </div>
     <% } %>
+    <div id="map" style="width: 400px; height: 300px"></div>
+    <script src="/js/showPageMap.js"></script>
   </div>
 </div>

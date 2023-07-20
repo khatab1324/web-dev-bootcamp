@@ -1,6 +1,11 @@
 const Campground = require("../models/campground");
-const { cloudinary } = require("../cloudinary");
+const { cloudinary } = require("../cloudinary"); //there inside it dirctory that distroy the imgs that in cloudinary
+// ==========for map=============
 
+const mapBoxToken = process.env.MAPBOX_TOKEN; //it will gose to .evn file and see mapbox_token
+const mbxGeocoding = require("@mapbox/mapbox-sdk/services/geocoding");
+const geocoder = mbxGeocoding({ accessToken: mapBoxToken });
+// to know more ubout them https://github.com/mapbox/mapbox-sdk-js
 module.exports.index = async (req, res) => {
   const campgrounds = await Campground.find({});
   res.render("campgrounds/index", { campgrounds });
@@ -15,7 +20,19 @@ module.exports.createCampground = async (req, res, next) => {
   // if (!req.body.campground)
   //   //this tell if the data emtdy like title price image all of this emtdy throw error
   //   throw new ExpressError("Invalid Campground Data", 400);
+  const geoData = await geocoder
+    .forwardGeocode({
+      //forwardGeocode form map services //https://github.com/mapbox/mapbox-sdk-js/blob/main/docs/services.md#geocoding
+      query: req.body.campground.location,
+      limit: 1,
+    })
+    .send();
+  console.log(geoData.body.features); //you can look to doc colt doesn't explain he said look at doc
+  // https://github.com/mapbox/mapbox-sdk-js/blob/main/docs/services
+  // https://github.com/mapbox/mapbox-sdk-js
+  // res.send(geoData.body.features[0].geometry.coordinates); //features[0]becuase its array//it give you [-119.571615,37.737363]->[longitude,latitude] if you add to google map will not found this you should opposide it like this [37.737363,-119.571615] it will work and remove the
   const campground = new Campground(req.body.campground);
+  campground.geometry = geoData.body.features[0].geometry;
   campground.images = req.files.map((f) => ({
     //map work just in array bacause of that images should be array
     url: f.path,
@@ -66,7 +83,7 @@ module.exports.renderEditForm = async (req, res) => {
 
 module.exports.updateCampground = async (req, res) => {
   const { id } = req.params;
-  console.log(req.body)
+  console.log(req.body);
   const campground = await Campground.findById(id);
   const camp = await Campground.findByIdAndUpdate(id, {
     ...req.body.campground,
@@ -76,6 +93,19 @@ module.exports.updateCampground = async (req, res) => {
   campground.images.push(...imgs); //we need to push because it exist
 
   campground.save();
+  if (req.body.deleteImages) {
+    for (let filename of req.body.deleteImages) {
+      //delete for each img that in req.body.deleteImages
+      await cloudinary.uploader.destroy(filename);
+    }
+
+    await campground.updateOne({
+      //here we delete it form mongoos
+      $pull: { images: { filename: { $in: req.body.deleteImages } } }, //pull its pull the element out of the array
+      //in above line I tell him pull form images array filename that (in) req.body.deleteImages
+    });
+    console.log(campground);
+  }
   req.flash("success", "Successfully updated campground!");
   // we have res.locals.success = req.flash("success"); this locals we don't need to pass it to ejs
   // ...it just will take the message that above and pass it to ejs
