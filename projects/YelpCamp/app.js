@@ -19,6 +19,7 @@ const multer = require("multer"); //it use for upoalde image and file //usage :M
 // const { storage } = require("./cloudinary"); //it auto will know index.js file
 // const upload = multer({ dest: "uploads/" }); //here you specify the destination for where you will save your file //this just a demo in real world ,we don't save our fail locally
 // const upload = multer({ storage }); //here you tell the muter to save the data in cloudinter
+const mongoSanitize = require("express-mongo-sanitize"); //this laibary to prevent any thing like {} or something that use code like users%20=db.users.find(%7Busername:%7B"$gt":""%7D%7D)
 const app = express();
 // =======================require file ==========================
 const catchAsync = require("./utils/catchAsync");
@@ -71,6 +72,8 @@ app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "public"))); //I tell express use public file
 // ....and use it if you call it from evry where just call it
 
+app.use(mongoSanitize()); //I here use it now if someone send this http://localhost:2023/?db.users.find(%7Busername:%7B%22$gt%22:%22%22%7D%7D) you will look for query like if console.log(req.query) you will find {} but if was normal like username=khattab you will find in console {username:khattab}
+
 app.use(flash()); //I use flash ,that short action happen for one like when you add product it show you product add ,when you refresh it will goes
 
 // ==========passport===================
@@ -98,6 +101,7 @@ passport.deserializeUser(User.deserializeUser()); //How do you get a user out of
 // I can't put it above because the currentUser debend on serializeUser and deserializer if you put it above them the currentUser will be undifine
 app.use((req, res, next) => {
   //this for using flash every where
+  console.log(req.query);
   res.locals.currentUser = req.user; //I explain it in middleware.js req.user ,the passport will deal with it
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");

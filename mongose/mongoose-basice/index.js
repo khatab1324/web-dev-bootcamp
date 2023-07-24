@@ -4,6 +4,7 @@ mongoose.set("strictQuery", true);
 //   useNewUrlParser: true,
 //   useUnifiedTopology: true,
 // });
+// this is not for my version , my version is 6
 // const db = mongoose.connection;
 // db.on("error", console.error.bind(console, "connection error:"));
 // db.once("open", function () {
@@ -29,7 +30,7 @@ const MovieSchema = new mongoose.Schema({
 });
 
 const Movie = mongoose.model("Movie", MovieSchema); //very important M capital
-//Movie will be in mongosh movies
+//Movie will be in mongosh movies//that mean I am add this schema to mongoosedb
 // I comment it because I already add it
 // const theFather = new Movie({
 //   name: "theFather",
