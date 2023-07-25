@@ -2,8 +2,10 @@
 //....we're saying if we're running in development mode.if we're in development, yes, we are in development require the EMV package, which is going to take the variables I've defined in .env file and add them into processed
 //it's mean it take secret file and add it here
 if (process.env.NODE_ENV !== "production") {
+  //if we are in development mode it will work
   require("dotenv").config();
 }
+
 //new we can access to this key in any file
 // console.log(process.env.SECRET);//i comment the SECRET
 // =================require laibary============================
@@ -20,6 +22,7 @@ const multer = require("multer"); //it use for upoalde image and file //usage :M
 // const upload = multer({ dest: "uploads/" }); //here you specify the destination for where you will save your file //this just a demo in real world ,we don't save our fail locally
 // const upload = multer({ storage }); //here you tell the muter to save the data in cloudinter
 const mongoSanitize = require("express-mongo-sanitize"); //this laibary to prevent any thing like {} or something that use code like users%20=db.users.find(%7Busername:%7B"$gt":""%7D%7D)
+const helmet = require("helmet"); //its have 11 meddelware that all have to do with HTTP headers, changing the behavior, turning on or off or manipulating headers and all in the name
 const app = express();
 // =======================require file ==========================
 const catchAsync = require("./utils/catchAsync");
@@ -52,12 +55,14 @@ app.engine("ejs", ejsMate); // this for ejsMate if you delete it the file can't 
 
 // ====================session===========
 const sessionConfig = {
+  name: "session", //this will give our cooke a name//to no one see the defult name and stele it and pretend to be the otherone
   secret: "thisshouldbeabettersecret!",
   resave: false,
   saveUninitialized: true,
   cookie: {
     //now i wrtie my cookies open cookies you will find it
-    httpOnly: true, //this for securty of cookies you can search just search httpOnly
+    httpOnly: true, //this for securty of cookies you can search just search httpOnly//This basically says that our cookies, at least the ones that are set through the session, are only accessible over HTTP, they're not accessible through JavaScript. So if somebody were to write a script or somehow write some JavaScript that executes on our site and extracts cookies, they would not be able to see our session cookie.
+    //  secure:true;//Basically, it says that this cookie should only work over https.
     expires: Date.now() + 1000 * 60 * 60 * 24 * 7, //this number is week long//this becuase Date.now its number like this 1688917466197
     maxAge: 1000 * 60 * 60 * 24 * 7,
     // NOTE: we use expires for ,like user sign-in ,we won't from him to sign for ever becuase of that after week the expire finsh and he will sign out
@@ -75,7 +80,57 @@ app.use(express.static(path.join(__dirname, "public"))); //I tell express use pu
 app.use(mongoSanitize()); //I here use it now if someone send this http://localhost:2023/?db.users.find(%7Busername:%7B%22$gt%22:%22%22%7D%7D) you will look for query like if console.log(req.query) you will find {} but if was normal like username=khattab you will find in console {username:khattab}
 
 app.use(flash()); //I use flash ,that short action happen for one like when you add product it show you product add ,when you refresh it will goes
+//use helmet //pleas reade about the docs is very good
+app.use(helmet({ contentSecurityPolicy: false })); //this will enable all the 11 meddelware//If I start my app up and I go to local host anything.My image isn't loading.it will show you error in console ->Refuse to load the script popper bootstrap Unsplash.And then they all say because it violates the following content security policy directive.//but if you set contentSecurityPolicy: false it will turn it off the program will work
+// we need to add the crossorigin="anonymous" attribute to all the HTML elements that include resources from external origins. This will allow our application pages to successfully load link and script elements that use external CDN servers (including Mapbox), and also to load images from Cloudinary.
+// to know cdn is =>a network of interconnected servers that speeds up webpage loading for data-heavy applications
 
+// here what you allow //We're restricting the locations that we can fetch resources from.to be able to have my application fetch scripts from.
+const scriptSrcUrls = [
+  //here I allow jsut this secript to use if you use another ones it will not shown to you
+  "https://stackpath.bootstrapcdn.com/",
+  "https://api.tiles.mapbox.com/",
+  "https://api.mapbox.com/",
+  "https://kit.fontawesome.com/",
+  "https://cdnjs.cloudflare.com/",
+  "https://cdn.jsdelivr.net",
+];
+const styleSrcUrls = [
+  "https://kit-free.fontawesome.com/",
+  "https://api.mapbox.com/",
+  "https://api.tiles.mapbox.com/",
+  "https://fonts.googleapis.com/",
+  "https://use.fontawesome.com/",
+  "https://cdn.jsdelivr.net", //By the time I got to implementing Bootstrap, Bootstrap was suggesting a single link tag for everything, JS and CSS. Because of this recommendation, the CSS styles from Bootstrap were also coming from "https://cdn.jsdelivr.net". This means I needed to add "https://cdn.jsdelivr.net" to the "styleSrcUrls" array, which Colt only includes in the "scriptSrcUrls" array. We can also remove "https://stackpath.bootstrapcdn.com/" from the style array.
+  "https://stackpath.bootstrapcdn.com/",
+];
+const connectSrcUrls = [
+  "https://api.mapbox.com/",
+  "https://a.tiles.mapbox.com/",
+  "https://b.tiles.mapbox.com/",
+  "https://events.mapbox.com/",
+];
+const fontSrcUrls = [];
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: [],
+      connectSrc: ["'self'", ...connectSrcUrls],
+      scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
+      styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
+      workerSrc: ["'self'", "blob:"],
+      objectSrc: [],
+      imgSrc: [
+        "'self'",
+        "blob:",
+        "data:",
+        `https://res.cloudinary.com/${process.env.CLOUDINARY_CLOUD_NAME}/`, //SHOULD MATCH YOUR CLOUDINARY ACCOUNT! //and I use my name in .env to found the imges
+        "https://images.unsplash.com/",
+      ],
+      fontSrc: ["'self'", ...fontSrcUrls],
+    },
+  })
+);
 // ==========passport===================
 // they must be under session
 //passport update and passport initialize doesn't exist yet but i just follow code colt
