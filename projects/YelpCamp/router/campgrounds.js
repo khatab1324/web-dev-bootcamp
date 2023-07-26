@@ -61,8 +61,8 @@ router
 router.get(
   "/campgrounds/:id/edit",
   isLoggedIn,
-  isAuthor,
-  catchAsync(campgroundControllers.renderEditForm)
+  catchAsync(campgroundControllers.renderEditForm),///campgrounds/64bbcb5b40c37ec495a1f887/edit if you chnage the Id your server will be down and I amke the easy way that make the athore down (last check) and it work for me if you make your code more powr zarko solve this problem in leture 558 
+  isAuthor
 );
 
 module.exports = router; //I write modele and this err show me Router.use() requires a middleware function but got a Object

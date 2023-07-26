@@ -23,6 +23,7 @@ const multer = require("multer"); //it use for upoalde image and file //usage :M
 // const upload = multer({ storage }); //here you tell the muter to save the data in cloudinter
 const mongoSanitize = require("express-mongo-sanitize"); //this laibary to prevent any thing like {} or something that use code like users%20=db.users.find(%7Busername:%7B"$gt":""%7D%7D)
 const helmet = require("helmet"); //its have 11 meddelware that all have to do with HTTP headers, changing the behavior, turning on or off or manipulating headers and all in the name
+const MongoDBStore = require("connect-mongo")(session);
 const app = express();
 // =======================require file ==========================
 const catchAsync = require("./utils/catchAsync");
@@ -32,9 +33,13 @@ const campgroundsRouter = require("./router/campgrounds");
 const reviewsRouter = require("./router/reviews");
 const User = require("./models/user");
 const userRoutes = require("./router/user");
+const dbUrl = process.env.DB_URL;
 
 mongoose.set("strictQuery", false); //DeprecationWarning: Mongoose: the `strictQuery` option will be switched back to `false` by default in Mongoose 7. Use `mongoose.set('strictQuery', false);` if you want to prepare for this change. Or use `mongoose.set('strictQuery', true);` to suppress this warning.
 mongoose
+
+  // .connect(dbUrl, {
+  //this is url that connect our data to server //that mean my database is do nothing
   .connect("mongodb://127.0.0.1:27017/yelp-camp", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -54,7 +59,21 @@ app.engine("ejs", ejsMate); // this for ejsMate if you delete it the file can't 
 //...that mean this engine to load body inside layout
 
 // ====================session===========
+// if we want our session information to be stored in Mongo, we need to now use that Mongo store to do that we should creat one before session config
+const store = new MongoDBStore({
+  url: "mongodb://127.0.0.1:27017/yelp-camp",
+  // if you want secret
+  secret: "thisshouldbeabettersecret!",
+  // touchAfter =>If you're using a newer version of Express Session, you don't want to save all the session on database.Every single time that the user refreshes the page, you can lazy update the session by limiting a period of time So this is referring to basically unnecessary re saves unnecessary updates where the data in the session has not changed.So if the data has changed, if it has or if it needs to be updated, it will be saved and updated.
+  // So we'll do touch after 24 hours times 60 minutes in an hour, times 60 seconds, because it needs to be in total number of seconds, not milliseconds, but seconds.
+  touchAfter: 24 * 60 * 60, //that mean it will removed after 14 days
+});
+// Then we just pass that in. But there are we have the option to look for errors.
+store.on("error", function (e) {
+  console.log("session store error", e);
+});
 const sessionConfig = {
+  store, //this will store our session in mongo
   name: "session", //this will give our cooke a name//to no one see the defult name and stele it and pretend to be the otherone
   secret: "thisshouldbeabettersecret!",
   resave: false,
