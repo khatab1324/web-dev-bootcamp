@@ -8,6 +8,11 @@ import SlotGame from './basic/SlotGame'
 import Shopinglest from './shopingcard/Shopinglest' 
 import Events from './Evens/Events'
 import From from './Evens/Form'
+import Counter from './Evens/Counter'
+import CounterWithState from './state/IntroState'
+import Toggler from './state/Toggler'
+import RandomColor from './state/ColorExercis'
+import ColorsListRandom from './state/ColorsLestExerice'
 const data=[
   {id:1000,item:'andomy',rating:4.5,price:34},
   {id:1222,item:'showrma',rating:4,price:33},
@@ -36,9 +41,18 @@ function App() {
     {/*  */}
 
     {/* shoping Lest*/}
+    
+  
+<ColorsListRandom colors={['red', 'blue', 'green', 'yellow', 'orange', 'purple', 'pink', 'brown', 'white', 'black', 'gray', 'cyan', 'magenta', 'lime', 'teal', 'lavender', 'maroon', 'navy', 'olive', 'aqua', 'coral', 'gold', 'indigo', 'violet', 'turquoise']
+}/>
+
  <Shopinglest items={data}/>
  <Events/>
  <From messege="don't click me plz" buttonText="don't click"/>
+ <Counter num={0}/>
+<CounterWithState/>
+<Toggler/>
+
     </div>
 }
 

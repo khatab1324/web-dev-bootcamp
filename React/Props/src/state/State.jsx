@@ -1,1 +1,0 @@
-// states is data specific to an inctace of a component . can change //that mean if there value should show in dom or in the page 
