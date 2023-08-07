@@ -8,27 +8,31 @@ export default function ScoreKeeper2({numPlayers,target}){
      }
     
     
-    const [score,setScore]=useState(Players);
-      
-      function playersScore(id){
-     const updatedPlayers = Players.map((player) => {
-      if (player.id === id) {
-        return {
-        ...player,
-        Pscore: player.Pscore + 1, // Increase Pscore by 1
-      };
-    }
-    return player; // Return the player as-is for other players
-  });
+     const [score, setScore] = useState(Players);
 
-  setScore(updatedPlayers);
-  }
-
-        return (
-        <div>
-          {Players.map((Player)=><p key={Player.id}>player:{Player.Pscore} &emsp;<button onClick={()=>playersScore(Player.id)}> add 1</button></p>)}
-          <div style={{marginTop:40}}><label htmlFor="">interVlaue</label>
-          <input type="text" name="" id="" /></div>
-        </div>
-      );
+     const playersScore = (id) => {
+       const updatedPlayers = [...Players];
+       const player = updatedPlayers.find((player) => player.id === id);
+       if (player) {
+         player.Pscore++;
+       }
+       setScore(updatedPlayers);
+     };
+     
+     const handleClick = (id) => {
+       playersScore(id);
+     };
+     
+     return (
+       <div>
+         {Players.map((Player) => (
+           <p key={Player.id}>
+             player: {Player.Pscore} &emsp;
+             <button onClick={() => handleClick(Player.id)}>
+               add 1
+             </button>
+           </p>
+         ))}
+       </div>
+     );
 }
