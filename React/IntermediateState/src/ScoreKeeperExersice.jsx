@@ -16,7 +16,13 @@ export default function ScoreKeeper2({numPlayers,target}){
        if (player) {
          player.Pscore++;
        }
-       setScore(updatedPlayers);
+      //  console.log(score);
+
+       setScore(currScore=>{
+return[
+  ...currScore,{...score,Pscore:9}
+]
+       });
      };
      
      const handleClick = (id) => {

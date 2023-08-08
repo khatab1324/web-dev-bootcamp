@@ -5,6 +5,12 @@ import UsernameForm from './Form/UsernameForm'
 import OldSingupForm from './Form/OldSingup'
 import BetterSignupForm from './Form/BetterSignup'
 import ShoppingLestForm from './shoppinglist/ShoppingLestForm'
+import ShoppingLest from './shoppinglist/ShoppingLest'
+import FormDemo from './shoppinglist/FormDemoValidation'
+import Counter from './HookEffect/Coutner'
+import QuoteFetcher from './HookEffect/QuoteFetcher'
+import QuoteFetcherLoader from './HookEffect/QuoteFetcherLoader'
+import ProfileViewerWithSearch from './HookEffect/ProfileViewerWithSearch'
 function lessThen8(dice){
   return sum(dice)<8
 }
@@ -25,7 +31,14 @@ return <div>
 {/* <BetterSignupForm/> */}
 
 {/* shoppingList */}
-<ShoppingLestForm/>
+{/* <ShoppingLest/> */}
+{/* <FormDemo/> */}
+
+{/* effect */}
+{/* <Counter/> */}
+{/* <QuoteFetcher/> */}
+{/* <QuoteFetcherLoader/> */}
+<ProfileViewerWithSearch/>
   </div>
 }
 

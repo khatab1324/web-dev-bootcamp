@@ -1,7 +1,7 @@
 import { useState } from "react";
-function ShoppingLestForm(){
+function ShoppingLestForm({addItem}){
 const [form, setForm]= useState({
-    product:"chess",
+    product:"",
     quantity:0,
    
 })
@@ -13,20 +13,20 @@ setForm(currDate=>{
     [evt.target.name]:evt.target.value}
 })
 }
+const handleSubmit=(e)=>{
+    e.preventDefault();
+    addItem(form)
+}
 return(
     
-   <form>
-    <div>
-        <h4>name product is :{form.product}</h4>
-        <br />
-        <h4>the quantity : {form.quantity}</h4>
-    </div>
+   <form onSubmit={handleSubmit}>{/* you can't addItem(form) you need func */}
+  
 <label htmlFor="product">product Name</label>
     <input type="text" placeholder="product" name="product" id="product" onChange={handleChange} value={form.product}/>
 <label htmlFor="quantity">Quantity</label>
 
     <input type="number" placeholder="quantity" name="quantity" id="quantity" onChange={handleChange} value={form.quantity}/>
-
+<button>add item</button>
    </form>
 )
 }
